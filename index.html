@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CampusBridge</title>
+    <title>CampusBridge - Institutional Lifecycle & Alumni Ecosystem</title>
     <!-- Google Fonts & Bootstrap 5 CSS -->
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -15,7 +15,7 @@
             --primary-hover: #1d4ed8;
             --secondary-color: #0f172a;
             --bg-light: #f8fafc;
-            --card-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.05), 0 4px 6px -2px rgba(0, 0, 0, 0.025);
+            --card-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.08), 0 8px 10px -6px rgba(0, 0, 0, 0.05);
         }
 
         body {
@@ -29,25 +29,54 @@
             border-bottom: 1px solid rgba(255, 255, 255, 0.1);
         }
 
+        .hero-banner {
+            background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+            border-radius: 1.5rem;
+            color: white;
+            padding: 3.5rem 2rem;
+            margin-bottom: 3rem;
+            box-shadow: 0 20px 25px -5px rgba(15, 23, 42, 0.2);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-banner::after {
+            content: "";
+            position: absolute;
+            top: -50%;
+            right: -20%;
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, rgba(37, 99, 235, 0.25) 0%, rgba(0, 0, 0, 0) 70%);
+            border-radius: 50%;
+            pointer-events: none;
+        }
+
         .role-card {
             border: none;
             border-radius: 1rem;
             background: #ffffff;
-            transition: all 0.3s ease-in-out;
+            transition: all 0.35s ease-in-out;
             cursor: pointer;
             box-shadow: var(--card-shadow);
             overflow: hidden;
+            position: relative;
         }
 
         .role-card:hover {
             transform: translateY(-8px);
-            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.15);
+            box-shadow: 0 20px 30px -10px rgba(37, 99, 235, 0.2);
         }
 
         .role-card-img {
             height: 160px;
             object-fit: cover;
             width: 100%;
+            transition: transform 0.5s ease;
+        }
+
+        .role-card:hover .role-card-img {
+            transform: scale(1.05);
         }
 
         .card-custom {
@@ -93,98 +122,174 @@
 </head>
 <body>
 
-    <!-- Header Navigation Bar -->
-    <nav class="navbar navbar-expand-lg navbar-dark navbar-custom sticky-top py-3">
+    <!-- Header Navigation Bar (Hidden entirely on the main landing screen, visible only inside active portals) -->
+    <nav class="navbar navbar-expand-lg navbar-dark navbar-custom sticky-top py-3" id="mainNavbar" style="display: none;">
         <div class="container">
             <a class="navbar-brand d-flex align-items-center fw-bold text-white fs-4" href="#" onclick="switchRole('login')">
                 <i class="bi bi-mortarboard-fill text-primary me-2 fs-3"></i> CampusBridge
             </a>
             <div class="d-flex align-items-center gap-3">
-                <span class="badge bg-primary-subtle text-primary border border-primary-subtle rounded-pill px-3 py-2" id="userRoleBadge">
-                    <i class="bi bi-person-circle me-1"></i> Mode: Role Selection
-                </span>
                 <button class="btn btn-outline-light btn-sm rounded-pill px-3" onclick="switchRole('login')">
-                    <i class="bi bi-arrow-left-right me-1"></i> Switch Role
+                    <i class="bi bi-arrow-left-right me-1"></i> Switch Portal
                 </button>
             </div>
         </div>
     </nav>
 
-    <div class="container my-5">
+    <div class="container my-4">
 
-        <!-- Role Selection Screen -->
+        <!-- Role Selection Screen (Main Home Landing with Restored Hero Banner) -->
         <div id="loginSection" class="dashboard-section active-section">
-            <div class="row g-4">
+            
+            <!-- Restored Appealing Hero Banner -->
+            <div class="hero-banner text-center text-lg-start">
+                <div class="row align-items-center">
+                    <div class="col-lg-8 mx-auto text-center">
+                        <span class="badge bg-primary bg-opacity-25 text-white border border-primary px-3 py-2 rounded-pill mb-3 fw-bold">
+                            <i class="bi bi-stars me-1 text-warning"></i> Empowering the Academic Journey
+                        </span>
+                        <h1 class="display-5 fw-extrabold text-white mb-3">Shaping Futures, Connecting Communities</h1>
+                        <p class="lead text-light opacity-85 mb-4 mx-auto" style="max-width: 680px;">
+                            Welcome to CampusBridge—where academic excellence meets lifelong connection. Seamlessly navigate your scholastic milestones, faculty collaborations, and professional alumni networks in one unified digital ecosystem.
+                        </p>
+                        <div class="d-flex flex-wrap justify-content-center gap-3">
+                            <div class="d-flex align-items-center text-light small">
+                                <i class="bi bi-shield-fill-check text-success me-2 fs-5"></i> Secure Credentials
+                            </div>
+                            <div class="d-flex align-items-center text-light small">
+                                <i class="bi bi-people-fill text-primary me-2 fs-5"></i> Collaborative Hub
+                            </div>
+                            <div class="d-flex align-items-center text-light small">
+                                <i class="bi bi-award-fill text-warning me-2 fs-5"></i> Recognition & Growth
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="text-center mb-4">
+                <h5 class="fw-bold text-dark">Select Your Portal Experience</h5>
+                <p class="small text-muted">Choose your designated access point below to enter your workspace</p>
+            </div>
+
+            <div class="row g-4 justify-content-center mb-5">
                 <div class="col-md-3">
-                    <div class="card role-card h-100" onclick="switchRole('student')">
+                    <div class="card role-card h-100 border-primary" onclick="openPortalAccess('student')">
                         <img src="https://images.unsplash.com/photo-1523240795612-9a054b0db644?auto=format&fit=crop&w=600&q=80" class="role-card-img" alt="Student Portal">
                         <div class="p-3 text-center">
                             <h6 class="fw-bold m-0 text-primary">Student Portal</h6>
+                            <small class="text-success fw-bold"><i class="bi bi-shield-check me-1"></i> ID Protected</small>
                         </div>
                     </div>
                 </div>
                 <div class="col-md-3">
-                    <div class="card role-card h-100" onclick="switchRole('faculty')">
+                    <div class="card role-card h-100 border-success" onclick="openPortalAccess('faculty')">
                         <img src="https://images.unsplash.com/photo-1524178232363-1fb2b075b655?auto=format&fit=crop&w=600&q=80" class="role-card-img" alt="Faculty Portal">
                         <div class="p-3 text-center">
                             <h6 class="fw-bold m-0 text-success">Faculty Portal</h6>
+                            <small class="text-success fw-bold"><i class="bi bi-shield-check me-1"></i> Staff ID & Oversight</small>
                         </div>
                     </div>
                 </div>
                 <div class="col-md-3">
-                    <div class="card role-card h-100" onclick="switchRole('admin')">
+                    <div class="card role-card h-100 border-warning" onclick="openPortalAccess('admin')">
                         <img src="https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&fit=crop&w=600&q=80" class="role-card-img" alt="Admin Portal">
                         <div class="p-3 text-center">
                             <h6 class="fw-bold m-0 text-warning">Admin Portal</h6>
+                            <small class="text-warning fw-bold"><i class="bi bi-shield-check me-1"></i> Security & Control</small>
                         </div>
                     </div>
                 </div>
                 <div class="col-md-3">
-                    <div class="card role-card h-100" onclick="switchRole('alumni')">
+                    <div class="card role-card h-100 border-info" onclick="openPortalAccess('alumni')">
                         <img src="https://images.unsplash.com/photo-1521737711867-e3b97375f902?auto=format&fit=crop&w=600&q=80" class="role-card-img" alt="Alumni Portal">
                         <div class="p-3 text-center">
                             <h6 class="fw-bold m-0 text-info">Alumni Portal</h6>
+                            <small class="text-info fw-bold"><i class="bi bi-shield-check me-1"></i> Unique ID</small>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
 
-        <!-- Student Portal -->
+        <!-- Student Portal Section -->
         <div id="studentSection" class="dashboard-section">
-            <div class="d-flex justify-content-between align-items-center mb-3">
-                <h4 class="fw-bold m-0"><i class="bi bi-person-vcard text-primary me-2"></i>Student Portal Dashboard</h4>
-                <div id="regStatusBadge">
-                    <span class="badge bg-warning-subtle text-warning border border-warning-subtle px-3 py-2 rounded-pill"><i class="bi bi-clock-history me-1"></i> Registration Pending</span>
+            <div id="studentGatekeeperView">
+                <div class="row justify-content-center">
+                    <div class="col-md-6">
+                        <div class="card card-custom p-4 shadow-sm border-primary">
+                            <div class="text-center mb-3">
+                                <div class="p-3 bg-primary-subtle text-primary rounded-circle d-inline-block mb-2">
+                                    <i class="bi bi-person-vcard-fill fs-2"></i>
+                                </div>
+                                <h5 class="fw-bold text-dark">Student Portal Access</h5>
+                                <p class="small text-muted m-0">Enter your official 10-digit Student ID and password to proceed.</p>
+                            </div>
+
+                            <ul class="nav nav-pills nav-fill mb-3 bg-light p-1 rounded" id="studentAuthTabs">
+                                <li class="nav-item">
+                                    <button class="nav-link active fw-bold py-1 small" onclick="switchStudentAuthMode('signup')">Signup (New)</button>
+                                </li>
+                                <li class="nav-item">
+                                    <button class="nav-link fw-bold py-1 small" onclick="switchStudentAuthMode('login')">Login (Existing)</button>
+                                </li>
+                            </ul>
+
+                            <div id="studentErrorAlert" class="alert alert-danger mb-3 small" style="display: none;">
+                                <i class="bi bi-exclamation-triangle-fill me-1"></i> <span id="studentErrorText">Error: Invalid credentials.</span>
+                            </div>
+
+                            <form id="studentSignupForm" onsubmit="verifyStudentSignup(event)">
+                                <div class="mb-2">
+                                    <label class="form-label">Full Name</label>
+                                    <input type="text" id="stuSignupName" class="form-control" placeholder="e.g. Shreyash Patil" required>
+                                </div>
+                                <div class="mb-2">
+                                    <label class="form-label">10-Digit Student ID</label>
+                                    <input type="text" id="stuSignupId" class="form-control" placeholder="e.g. 2026010061" maxlength="10" minlength="10" required>
+                                </div>
+                                <div class="mb-3">
+                                    <label class="form-label">Set Account Password</label>
+                                    <input type="password" id="stuSignupPassword" class="form-control" placeholder="Create a secure password" required>
+                                </div>
+                                <button type="submit" class="btn btn-primary text-white w-100 fw-bold py-2"><i class="bi bi-person-plus-fill me-1"></i> Verify & Proceed</button>
+                            </form>
+
+                            <form id="studentLoginForm" onsubmit="verifyStudentLogin(event)" style="display: none;">
+                                <div class="mb-2">
+                                    <label class="form-label">10-Digit Student ID</label>
+                                    <input type="text" id="stuLoginId" class="form-control" placeholder="e.g. 2026010061" maxlength="10" minlength="10" required>
+                                </div>
+                                <div class="mb-3">
+                                    <label class="form-label">Password</label>
+                                    <input type="password" id="stuLoginPassword" class="form-control" placeholder="Enter your password" required>
+                                </div>
+                                <button type="submit" class="btn btn-primary text-white w-100 fw-bold py-2"><i class="bi bi-box-arrow-in-right me-1"></i> Login & Access</button>
+                            </form>
+                        </div>
+                    </div>
                 </div>
             </div>
 
-            <!-- View A: Unregistered State (Registration Form) -->
-            <div id="studentFormView">
+            <div id="studentFormView" style="display: none;">
                 <div class="card card-custom">
                     <div class="card-header-custom d-flex justify-content-between align-items-center">
                         <span><i class="bi bi-card-heading me-2 text-primary"></i>Student Registration & Record Intake Form</span>
-                        <span class="badge bg-primary-subtle text-primary">Comps Div 3 - Batch C</span>
+                        <span class="badge bg-primary-subtle text-primary">Class Senior</span>
                     </div>
                     <div class="card-body p-4">
                         <form id="recordForm" onsubmit="submitStudentRecord(event)">
-                            
-                            <!-- Personal Details -->
                             <h6 class="fw-bold text-primary mb-3"><i class="bi bi-person-fill me-1"></i> 1. Personal & Contact Details</h6>
                             <div class="row g-3 mb-4">
-                                <div class="col-md-4">
+                                <div class="col-md-5">
                                     <label class="form-label">Full Name</label>
-                                    <input type="text" id="stuName" class="form-control" placeholder="e.g. Shreyash Patil" required>
-                                </div>
-                                <div class="col-md-2">
-                                    <label class="form-label">Roll Number</label>
-                                    <input type="text" id="stuRoll" class="form-control" placeholder="61" required>
+                                    <input type="text" id="stuName" class="form-control" readonly>
                                 </div>
                                 <div class="col-md-3">
-                                    <label class="form-label">Student ID</label>
-                                    <input type="text" id="stuId" class="form-control" placeholder="STU-2026-61" required>
+                                    <label class="form-label">10-Digit Student ID</label>
+                                    <input type="text" id="stuId" class="form-control" readonly>
                                 </div>
-                                <div class="col-md-3">
+                                <div class="col-md-4">
                                     <label class="form-label">Phone Number</label>
                                     <input type="tel" id="stuPhone" class="form-control" placeholder="+91 9876543210" required>
                                 </div>
@@ -207,60 +312,75 @@
                                 </div>
                             </div>
 
-                            <!-- Academic & Attendance Metrics -->
                             <h6 class="fw-bold text-primary mb-3"><i class="bi bi-journal-bookmark-fill me-1"></i> 2. Academic Metrics & Attendance</h6>
                             <div class="row g-3 mb-4">
                                 <div class="col-md-3">
                                     <label class="form-label">Department</label>
-                                    <input type="text" id="stuDept" class="form-control" value="Computer Engineering" readonly>
+                                    <select id="stuDept" class="form-select" required>
+                                        <option value="Computer Engineering">Computer Engineering</option>
+                                        <option value="Information Technology">Information Technology</option>
+                                        <option value="Electronics & Telecommunication">Electronics & Telecommunication</option>
+                                        <option value="Mechanical Engineering">Mechanical Engineering</option>
+                                    </select>
                                 </div>
                                 <div class="col-md-3">
-                                    <label class="form-label">Division & Batch</label>
-                                    <input type="text" id="stuBatch" class="form-control" value="Comps 3 - Batch C" required>
+                                    <label class="form-label">Year</label>
+                                    <select id="stuYear" class="form-select" required>
+                                        <option value="FE">First Year (FE)</option>
+                                        <option value="SE">Second Year (SE)</option>
+                                        <option value="TE">Third Year (TE)</option>
+                                        <option value="BE" selected>Final Year (BE)</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-3">
+                                    <label class="form-label">Class</label>
+                                    <select id="stuClass" class="form-select" required>
+                                        <option value="A">Class A</option>
+                                        <option value="B">Class B</option>
+                                        <option value="C" selected>Class C</option>
+                                    </select>
                                 </div>
                                 <div class="col-md-3">
                                     <label class="form-label">Cumulative CGPA</label>
                                     <input type="number" step="0.01" id="stuCGPA" class="form-control" placeholder="9.20" min="0" max="10" required>
                                 </div>
-                                <div class="col-md-3">
-                                    <label class="form-label">Attendance Record (%)</label>
-                                    <input type="number" step="0.1" id="stuAttendance" class="form-control" placeholder="88.5" min="0" max="100" required>
-                                </div>
                             </div>
 
-                            <!-- Extracurriculars & Memory -->
                             <h6 class="fw-bold text-primary mb-3"><i class="bi bi-trophy-fill me-1"></i> 3. Achievements & Farewell Note</h6>
                             <div class="row g-3 mb-4">
                                 <div class="col-md-6">
                                     <label class="form-label">Extracurricular Achievements & Projects</label>
-                                    <textarea id="stuAchievements" class="form-control" rows="3" placeholder="Projects led, hackathons won, committee contributions..." required></textarea>
+                                    <textarea id="stuAchievements" class="form-control" rows="3" placeholder="Projects led, hackathons won..." required></textarea>
                                 </div>
                                 <div class="col-md-6">
                                     <label class="form-label">Farewell Message / Yearbook Note</label>
-                                    <textarea id="stuMemory" class="form-control" rows="3" placeholder="Share a farewell message or memory for your peers..." required></textarea>
+                                    <textarea id="stuMemory" class="form-control" rows="3" placeholder="Share a farewell message..." required></textarea>
                                 </div>
                             </div>
 
                             <div class="d-flex justify-content-end">
-                                <button type="submit" class="btn btn-primary px-4 fw-bold"><i class="bi bi-check-circle me-1"></i> Register & Submit Records</button>
+                                <button type="submit" class="btn btn-primary px-4 fw-bold"><i class="bi bi-check-circle me-1"></i> Complete Registration (Pending Verification)</button>
                             </div>
                         </form>
                     </div>
                 </div>
             </div>
 
-            <!-- View B: Registered State (Profile & Records Overview View) -->
             <div id="studentProfileView" style="display: none;">
+                <div class="d-flex justify-content-between align-items-center mb-3">
+                    <h4 class="fw-bold m-0"><i class="bi bi-person-vcard text-primary me-2"></i>Student Portal Dashboard</h4>
+                    <span id="studentVerificationStatusBadge" class="badge px-3 py-2 rounded-pill">Status</span>
+                </div>
+
                 <div class="row g-3 mb-4">
-                    <!-- Student Profile Info Card -->
                     <div class="col-md-4">
                         <div class="card card-custom p-4 text-center h-100">
                             <div class="p-3 bg-primary-subtle text-primary rounded-circle d-inline-block mx-auto mb-2" style="width: fit-content;">
                                 <i class="bi bi-person-circle fs-1"></i>
                             </div>
                             <h5 class="fw-bold mb-1" id="profileName">Shreyash Patil</h5>
-                            <p class="text-muted small mb-2" id="profileIds">Student ID: STU-2026-61 | Roll No: 61</p>
-                            <span class="badge bg-primary-subtle text-primary px-3 py-2 rounded-pill mb-3" id="profileBatch">Comps 3 - Batch C</span>
+                            <p class="text-muted small mb-2" id="profileIds">Student ID: 2026010061</p>
+                            <span class="badge bg-primary-subtle text-primary px-3 py-2 rounded-pill mb-3" id="profileClass">Active Student</span>
                             <hr class="my-2">
                             <div class="text-start small mt-2">
                                 <p class="mb-1"><strong>Phone:</strong> <span id="profilePhone">+91 9876543210</span></p>
@@ -270,7 +390,6 @@
                         </div>
                     </div>
 
-                    <!-- Academic Stats & Submitted Records -->
                     <div class="col-md-8">
                         <div class="row g-3 mb-3">
                             <div class="col-md-6">
@@ -287,287 +406,516 @@
                             </div>
                         </div>
 
-                        <!-- Submitted Achievements & Farewell Memory -->
                         <div class="card card-custom p-4">
                             <h6 class="fw-bold text-primary mb-2"><i class="bi bi-trophy-fill me-1"></i> Submitted Achievements</h6>
                             <p class="small text-muted mb-3" id="profileAchievements">Leading mini-project architecture and system development.</p>
 
                             <h6 class="fw-bold text-primary mb-2"><i class="bi bi-journal-album me-1"></i> Your Yearbook Farewell Note</h6>
                             <div class="p-3 bg-light rounded border">
-                                <p class="fst-italic mb-0 small text-secondary" id="profileMemory">"Grateful for four incredible years with Comps Batch C!"</p>
+                                <p class="fst-italic mb-0 small text-secondary" id="profileMemory">"Grateful for four incredible years!"</p>
                             </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Yearbook Memory Feed -->
-                <div class="card card-custom p-4">
-                    <h6 class="fw-bold mb-3"><i class="bi bi-chat-quote-fill text-primary me-2"></i>Yearbook Memory Wall Feed</h6>
-                    <form onsubmit="postStudentMemory(event)" class="mb-3">
-                        <div class="input-group">
-                            <input type="text" id="memoryInputText" class="form-control" placeholder="Share a message or memory with your batch..." required>
-                            <button class="btn btn-primary fw-bold" type="submit"><i class="bi bi-send me-1"></i> Post Note</button>
-                        </div>
-                    </form>
-                    <div id="stuMemoryFeed" class="d-flex flex-column gap-2 overflow-auto" style="max-height: 250px;">
-                        <div class="p-3 bg-light rounded border">
-                            <div class="d-flex justify-content-between align-items-center mb-1">
-                                <strong class="text-primary">Rahul Kumar (Roll 55)</strong>
-                                <small class="text-muted">2 hours ago</small>
-                            </div>
-                            <p class="mb-0 small">"Proud to be part of Comps Batch C! Best four years of learning."</p>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
 
-        <!-- Faculty Portal -->
+        <!-- Faculty Portal Section -->
         <div id="facultySection" class="dashboard-section">
-            <div class="d-flex justify-content-between align-items-center mb-3">
-                <h4 class="fw-bold m-0"><i class="bi bi-person-workspace text-success me-2"></i>Faculty Panel</h4>
-            </div>
+            <div id="facultyGatekeeperView">
+                <div class="row justify-content-center">
+                    <div class="col-md-6">
+                        <div class="card card-custom p-4 shadow-sm border-success">
+                            <div class="text-center mb-3">
+                                <div class="p-3 bg-success-subtle text-success rounded-circle d-inline-block mb-2">
+                                    <i class="bi bi-shield-lock-fill fs-2"></i>
+                                </div>
+                                <h5 class="fw-bold text-dark">Faculty Portal Gateway</h5>
+                                <p class="small text-muted m-0">Strict Staff ID & Name Matching (e.g. FAC-STAFF-01, FAC-STAFF-02).</p>
+                            </div>
 
-            <!-- Tab Navigation -->
-            <ul class="nav nav-pills mb-3" id="facultyTabs">
-                <li class="nav-item">
-                    <button class="nav-link active" data-bs-toggle="pill" data-bs-target="#awardTab"><i class="bi bi-cpu me-1"></i> Shortlisted Awards & Voting</button>
-                </li>
-                <li class="nav-item">
-                    <button class="nav-link" data-bs-toggle="pill" data-bs-target="#recordsTab"><i class="bi bi-table me-1"></i> All Student Records</button>
-                </li>
-            </ul>
+                            <ul class="nav nav-pills nav-fill mb-3 bg-light p-1 rounded" id="facultyAuthTabs">
+                                <li class="nav-item">
+                                    <button class="nav-link active fw-bold py-1 small" onclick="switchFacultyAuthMode('signup')">Signup (New)</button>
+                                </li>
+                                <li class="nav-item">
+                                    <button class="nav-link fw-bold py-1 small" onclick="switchFacultyAuthMode('login')">Login (Existing)</button>
+                                </li>
+                            </ul>
 
-            <div class="tab-content">
-                <!-- Shortlisted Awards & Voting -->
-                <div class="tab-pane fade show active" id="awardTab">
-                    <div class="card card-custom p-4">
-                        <div class="table-responsive">
-                            <table class="table align-middle table-hover">
-                                <thead class="table-light">
-                                    <tr>
-                                        <th>Award Category</th>
-                                        <th>Shortlisted Nominee</th>
-                                        <th>Basis / Metrics</th>
-                                        <th>Faculty Votes</th>
-                                        <th>Action</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td><span class="fw-bold">Academic Excellence</span></td>
-                                        <td>Rahul Kumar (Roll 55)</td>
-                                        <td>CGPA: 9.85 | Attendance: 94.2%</td>
-                                        <td><span id="vote-55" class="badge bg-secondary">1 Vote</span></td>
-                                        <td><button class="btn btn-sm btn-outline-success" onclick="voteForNominee('55')"><i class="bi bi-hand-thumbs-up me-1"></i> Vote</button></td>
-                                    </tr>
-                                    <tr>
-                                        <td><span class="fw-bold">Best All-Rounder</span></td>
-                                        <td>Sameer Bagayatkar (Roll 62)</td>
-                                        <td>CGPA: 9.10 | Attendance: 89.0%</td>
-                                        <td><span id="vote-62" class="badge bg-secondary">2 Votes</span></td>
-                                        <td><button class="btn btn-sm btn-outline-success" onclick="voteForNominee('62')"><i class="bi bi-hand-thumbs-up me-1"></i> Vote</button></td>
-                                    </tr>
-                                    <tr>
-                                        <td><span class="fw-bold">Technical Innovator</span></td>
-                                        <td>Shreyash Patil (Roll 61)</td>
-                                        <td>CGPA: 9.20 | Attendance: 88.5%</td>
-                                        <td><span id="vote-61" class="badge bg-secondary">3 Votes</span></td>
-                                        <td><button class="btn btn-sm btn-outline-success" onclick="voteForNominee('61')"><i class="bi bi-hand-thumbs-up me-1"></i> Vote</button></td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                </div>
+                            <div id="facultyErrorAlert" class="alert alert-danger mb-3 small" style="display: none;">
+                                <i class="bi bi-exclamation-triangle-fill me-1"></i> <span id="facultyErrorText">Error: Invalid credentials.</span>
+                            </div>
 
-                <!-- View All Student Records -->
-                <div class="tab-pane fade" id="recordsTab">
-                    <div class="card card-custom p-4">
-                        <h6 class="fw-bold mb-3">Student Record Database</h6>
-                        <div class="table-responsive">
-                            <table class="table table-striped align-middle small">
-                                <thead class="table-light">
-                                    <tr>
-                                        <th>Roll</th>
-                                        <th>Name</th>
-                                        <th>Student ID / Phone</th>
-                                        <th>CGPA</th>
-                                        <th>Attendance</th>
-                                        <th>Achievements</th>
-                                        <th>Farewell Note</th>
-                                    </tr>
-                                </thead>
-                                <tbody id="facultyStudentTable">
-                                    <tr>
-                                        <td>49</td><td>Aadi Shetty</td><td>STU-2026-49 | +91 9876543210</td><td>8.90</td><td><span class="badge bg-success-subtle text-success">85.0%</span></td><td>Data Analytics Lead</td><td>"Great journey with everyone!"</td>
-                                    </tr>
-                                    <tr>
-                                        <td>51</td><td>Ashil George</td><td>STU-2026-51 | +91 9876543211</td><td>8.75</td><td><span class="badge bg-success-subtle text-success">82.4%</span></td><td>Web Architecture Lead</td><td>"Unforgettable memories."</td>
-                                    </tr>
-                                    <tr>
-                                        <td>55</td><td>Rahul Kumar</td><td>STU-2026-55 | +91 9876543212</td><td>9.85</td><td><span class="badge bg-success-subtle text-success">94.2%</span></td><td>Top Academic Ranker</td><td>"Proud to be here!"</td>
-                                    </tr>
-                                    <tr>
-                                        <td>61</td><td>Shreyash Patil</td><td>STU-2026-61 | +91 9876543213</td><td>9.20</td><td><span class="badge bg-success-subtle text-success">88.5%</span></td><td>Mini-Project Lead</td><td>"Grateful for everything!"</td>
-                                    </tr>
-                                    <tr>
-                                        <td>62</td><td>Sameer Bagayatkar</td><td>STU-2026-62 | +91 9876543214</td><td>9.10</td><td><span class="badge bg-success-subtle text-success">89.0%</span></td><td>System Architecture Lead</td><td>"Best batch ever!"</td>
-                                    </tr>
-                                </tbody>
-                            </table>
+                            <form id="facultySignupForm" onsubmit="verifyFacultySignup(event)">
+                                <div class="mb-2">
+                                    <label class="form-label">Full Name</label>
+                                    <input type="text" id="facSignupName" class="form-control" placeholder="Priti Andhale or Nazarath Remedios" required>
+                                </div>
+                                <div class="mb-2">
+                                    <label class="form-label">Staff ID (e.g. FAC-STAFF-01)</label>
+                                    <input type="text" id="facSignupStaffId" class="form-control" placeholder="FAC-STAFF-01" required>
+                                </div>
+                                <div class="mb-3">
+                                    <label class="form-label">Set Account Password</label>
+                                    <input type="password" id="facSignupPassword" class="form-control" placeholder="Create secure password" required>
+                                </div>
+                                <button type="submit" class="btn btn-success text-white w-100 fw-bold py-2"><i class="bi bi-person-plus-fill me-1"></i> Verify & Configure Scope</button>
+                            </form>
+
+                            <form id="facultyLoginForm" onsubmit="verifyFacultyLogin(event)" style="display: none;">
+                                <div class="mb-2">
+                                    <label class="form-label">Staff ID</label>
+                                    <input type="text" id="facLoginStaffId" class="form-control" placeholder="FAC-STAFF-01" required>
+                                </div>
+                                <div class="mb-3">
+                                    <label class="form-label">Password</label>
+                                    <input type="password" id="facLoginPassword" class="form-control" placeholder="Enter password" required>
+                                </div>
+                                <button type="submit" class="btn btn-success text-white w-100 fw-bold py-2"><i class="bi bi-box-arrow-in-right me-1"></i> Login & Access Dashboard</button>
+                            </form>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
 
-        <!-- Admin Portal -->
-        <div id="adminSection" class="dashboard-section">
-            
-            <!-- Dynamic Stats Widgets -->
-            <div class="row g-3 mb-4">
-                <div class="col-md-3">
-                    <div class="card card-custom stat-card p-3">
-                        <div class="text-muted small">Active Senior Class</div>
-                        <h3 class="fw-bold text-primary m-0" id="statActiveCount">5</h3>
-                    </div>
-                </div>
-                <div class="col-md-3">
-                    <div class="card card-custom stat-card p-3" style="border-left-color: #10b981;">
-                        <div class="text-muted small">Converted Alumni</div>
-                        <h3 class="fw-bold text-success m-0" id="statAlumniCount">2</h3>
-                    </div>
-                </div>
-                <div class="col-md-3">
-                    <div class="card card-custom stat-card p-3" style="border-left-color: #f59e0b;">
-                        <div class="text-muted small">Submitted Records</div>
-                        <h3 class="fw-bold text-warning m-0" id="statSubmittedCount">5</h3>
-                    </div>
-                </div>
-                <div class="col-md-3">
-                    <div class="card card-custom stat-card p-3" style="border-left-color: #6366f1;">
-                        <div class="text-muted small">Batch Year</div>
-                        <h3 class="fw-bold text-indigo m-0">2026</h3>
+            <div id="facultyCreationDashboardView" style="display: none;">
+                <div class="row justify-content-center">
+                    <div class="col-md-7">
+                        <div class="card card-custom p-4 border-success shadow-sm">
+                            <div class="d-flex justify-content-between align-items-center mb-3">
+                                <h5 class="fw-bold text-success m-0"><i class="bi bi-card-heading me-1"></i> Faculty Department & Scope Assignment</h5>
+                                <span class="badge bg-success-subtle text-success">Verified: <span id="facCreationVerifiedName"></span></span>
+                            </div>
+                            <p class="small text-muted mb-4">Select your institutional department. Choose <strong>Alumni Association</strong> specifically for alumni directory oversight.</p>
+                            
+                            <form onsubmit="submitFirstFacultyProfile(event)">
+                                <div class="row g-3 mb-3">
+                                    <div class="col-md-6">
+                                        <label class="form-label">Full Name</label>
+                                        <input type="text" id="facCreateFormName" class="form-control" readonly>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label class="form-label">Staff ID</label>
+                                        <input type="text" id="facCreateFormStaffId" class="form-control" readonly>
+                                    </div>
+                                </div>
+                                <div class="mb-3">
+                                    <label class="form-label">Department Assignment</label>
+                                    <select id="facCreateFormDept" class="form-select" onchange="toggleFacultyAssignmentFields()" required>
+                                        <option value="">Choose Department...</option>
+                                        <option value="Computer Engineering">Computer Engineering</option>
+                                        <option value="Information Technology">Information Technology</option>
+                                        <option value="Electronics & Telecommunication">Electronics & Telecommunication</option>
+                                        <option value="Mechanical Engineering">Mechanical Engineering</option>
+                                        <option value="Alumni Association">Alumni Association</option>
+                                    </select>
+                                </div>
+                                <div id="facultyClassScopeContainer" class="row g-3 mb-3">
+                                    <div class="col-md-6">
+                                        <label class="form-label">Academic Year</label>
+                                        <select id="facCreateFormYear" class="form-select">
+                                            <option value="FE">FE (First Year)</option>
+                                            <option value="SE">SE (Second Year)</option>
+                                            <option value="TE">TE (Third Year)</option>
+                                            <option value="BE" selected>BE (Final Year)</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label class="form-label">Assigned Class</label>
+                                        <select id="facCreateFormClass" class="form-select">
+                                            <option value="A">Class A</option>
+                                            <option value="B">Class B</option>
+                                            <option value="C" selected>Class C</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="mb-3">
+                                    <label class="form-label">Official Email</label>
+                                    <input type="email" id="facCreateFormEmail" class="form-control" placeholder="faculty@institution.edu" required>
+                                </div>
+                                <button type="submit" class="btn btn-success w-100 fw-bold py-2"><i class="bi bi-check-circle-fill me-1"></i> Complete Registration & Access Dashboard</button>
+                            </form>
+                        </div>
                     </div>
                 </div>
             </div>
 
-            <!-- Management Tools -->
-            <div class="card card-custom p-4 mb-4">
+            <!-- Main Faculty Dashboard -->
+            <div id="facultyMainDashboardView" style="display: none;">
                 <div class="d-flex justify-content-between align-items-center mb-3">
-                    <h5 class="fw-bold m-0"><i class="bi bi-shield-lock text-warning me-2"></i>Batch 2026 Student Record Management</h5>
-                    <button class="btn btn-warning fw-bold" onclick="graduateBatch()"><i class="bi bi-arrow-repeat me-1"></i> Graduate Entire Batch</button>
-                </div>
-
-                <!-- Search and Filter -->
-                <div class="row g-2 mb-3">
-                    <div class="col-md-8">
-                        <input type="text" id="adminSearchInput" class="form-control" placeholder="Search student by name or roll number..." onkeyup="filterAdminTable()">
+                    <div>
+                        <h4 class="fw-bold m-0"><i class="bi bi-shield-check text-success me-2"></i>Faculty Dashboard</h4>
+                        <small class="text-success fw-bold me-2"><i class="bi bi-check-circle-fill me-1"></i> <span id="facultyLoggedInName"></span></small>
+                        <span class="badge bg-success-subtle text-success border border-success-subtle" id="assignedClassBadge">Unassigned</span>
                     </div>
-                    <div class="col-md-4">
-                        <select id="adminStatusFilter" class="form-select" onchange="filterAdminTable()">
-                            <option value="ALL">All Statuses</option>
-                            <option value="Active Senior">Active Senior</option>
-                            <option value="Converted Alumni">Converted Alumni</option>
-                        </select>
+                    <div class="d-flex align-items-center gap-3">
+                        <div class="dropdown">
+                            <button class="btn btn-outline-success btn-sm rounded-circle d-flex align-items-center justify-content-center dropdown-toggle" style="width: 40px; height: 40px;" type="button" id="facultyProfileMenuBtn" data-bs-toggle="dropdown" aria-expanded="false" title="Faculty Profile & Options">
+                                <i class="bi bi-person-fill fs-5"></i>
+                            </button>
+                            <ul class="dropdown-menu dropdown-menu-end shadow border-0 p-3" style="width: 280px;" aria-labelledby="facultyProfileMenuBtn">
+                                <li>
+                                    <h6 class="fw-bold text-dark m-0" id="dropdownFacName">Faculty Member</h6>
+                                    <small class="text-muted d-block mb-2" id="dropdownFacStaffId">ID: UNKNOWN</small>
+                                </li>
+                                <li><hr class="dropdown-divider"></li>
+                                <li class="small mb-1"><strong>Dept:</strong> <span id="dropdownFacDept">N/A</span></li>
+                                <li class="small mb-3"><strong>Scope:</strong> <span id="dropdownFacScope">N/A</span></li>
+                                <li><hr class="dropdown-divider"></li>
+                                <li class="mb-2">
+                                    <button class="btn btn-outline-success btn-sm w-100 fw-bold text-start" onclick="openFacultyUpdateModal()"><i class="bi bi-pencil-square me-1"></i> Update Profile Details</button>
+                                </li>
+                                <li>
+                                    <button class="btn btn-danger btn-sm w-100 fw-bold" onclick="logoutFacultySession()"><i class="bi bi-box-arrow-right me-1"></i> Logout Faculty</button>
+                                </li>
+                            </ul>
+                        </div>
                     </div>
                 </div>
 
-                <!-- Interactive Admin Table -->
-                <div class="table-responsive">
-                    <table class="table align-middle">
-                        <thead class="table-light">
-                            <tr>
-                                <th>Roll</th>
-                                <th>Student Name</th>
-                                <th>Department</th>
-                                <th>Status</th>
-                                <th>Action</th>
-                            </tr>
-                        </thead>
-                        <tbody id="adminStudentTable">
-                            <tr id="adminRow-49">
-                                <td>49</td><td>Aadi Shetty</td><td>Computer Engineering</td>
-                                <td><span class="badge bg-primary" id="adminBadge-49">Active Senior</span></td>
-                                <td><button class="btn btn-sm btn-outline-success" onclick="toggleStudentStatus('49', 'Aadi Shetty')"><i class="bi bi-box-arrow-up-right me-1"></i> Convert to Alumni</button></td>
-                            </tr>
-                            <tr id="adminRow-51">
-                                <td>51</td><td>Ashil George</td><td>Computer Engineering</td>
-                                <td><span class="badge bg-primary" id="adminBadge-51">Active Senior</span></td>
-                                <td><button class="btn btn-sm btn-outline-success" onclick="toggleStudentStatus('51', 'Ashil George')"><i class="bi bi-box-arrow-up-right me-1"></i> Convert to Alumni</button></td>
-                            </tr>
-                            <tr id="adminRow-55">
-                                <td>55</td><td>Rahul Kumar</td><td>Computer Engineering</td>
-                                <td><span class="badge bg-primary" id="adminBadge-55">Active Senior</span></td>
-                                <td><button class="btn btn-sm btn-outline-success" onclick="toggleStudentStatus('55', 'Rahul Kumar')"><i class="bi bi-box-arrow-up-right me-1"></i> Convert to Alumni</button></td>
-                            </tr>
-                            <tr id="adminRow-61">
-                                <td>61</td><td>Shreyash Patil</td><td>Computer Engineering</td>
-                                <td><span class="badge bg-primary" id="adminBadge-61">Active Senior</span></td>
-                                <td><button class="btn btn-sm btn-outline-success" onclick="toggleStudentStatus('61', 'Shreyash Patil')"><i class="bi bi-box-arrow-up-right me-1"></i> Convert to Alumni</button></td>
-                            </tr>
-                            <tr id="adminRow-62">
-                                <td>62</td><td>Sameer Bagayatkar</td><td>Computer Engineering</td>
-                                <td><span class="badge bg-primary" id="adminBadge-62">Active Senior</span></td>
-                                <td><button class="btn btn-sm btn-outline-success" onclick="toggleStudentStatus('62', 'Sameer Bagayatkar')"><i class="bi bi-box-arrow-up-right me-1"></i> Convert to Alumni</button></td>
-                            </tr>
-                        </tbody>
-                    </table>
+                <div id="facultyProfileUpdateCard" class="card card-custom p-4 border-success mb-4" style="display: none;">
+                    <div class="d-flex justify-content-between align-items-center mb-3">
+                        <h6 class="fw-bold text-success m-0"><i class="bi bi-pencil-square me-1"></i> Edit Faculty Profile & Scope</h6>
+                        <button class="btn btn-sm btn-outline-secondary" onclick="closeFacultyUpdateModal()"><i class="bi bi-x-lg"></i></button>
+                    </div>
+                    <form onsubmit="saveFacultyProfileUpdate(event)">
+                        <div class="row g-3 mb-3">
+                            <div class="col-md-6">
+                                <label class="form-label">Full Name</label>
+                                <input type="text" id="updateFacName" class="form-control" required>
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label">Official Email</label>
+                                <input type="email" id="updateFacEmail" class="form-control" required>
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label">Department</label>
+                                <select id="updateFacDept" class="form-select" required>
+                                    <option value="Computer Engineering">Computer Engineering</option>
+                                    <option value="Information Technology">Information Technology</option>
+                                    <option value="Electronics & Telecommunication">Electronics & Telecommunication</option>
+                                    <option value="Mechanical Engineering">Mechanical Engineering</option>
+                                    <option value="Alumni Association">Alumni Association</option>
+                                </select>
+                            </div>
+                            <div class="col-md-3">
+                                <label class="form-label">Year</label>
+                                <select id="updateFacYear" class="form-select">
+                                    <option value="FE">FE</option>
+                                    <option value="SE">SE</option>
+                                    <option value="TE">TE</option>
+                                    <option value="BE">BE</option>
+                                    <option value="All">All</option>
+                                </select>
+                            </div>
+                            <div class="col-md-3">
+                                <label class="form-label">Class</label>
+                                <select id="updateFacClass" class="form-select">
+                                    <option value="A">A</option>
+                                    <option value="B">B</option>
+                                    <option value="C">C</option>
+                                    <option value="All">All</option>
+                                </select>
+                            </div>
+                        </div>
+                        <button type="submit" class="btn btn-success btn-sm fw-bold px-4"><i class="bi bi-save me-1"></i> Save Changes</button>
+                    </form>
                 </div>
-            </div>
 
-            <!-- Activity Log -->
-            <div class="card card-custom p-4">
-                <h6 class="fw-bold mb-3"><i class="bi bi-journal-text me-2"></i>System Activity Audit Log</h6>
-                <ul class="list-group list-group-flush small" id="adminActivityLog">
-                    <li class="list-group-item text-muted">[System Log] Admin portal session initialized.</li>
+                <div class="card card-custom p-3 bg-light border mb-4">
+                    <div class="d-flex align-items-center justify-content-between">
+                        <div class="small">
+                            <i class="bi bi-shield-lock-fill text-success fs-5 me-2"></i>
+                            <strong>Active Scope:</strong> Managing records for <strong id="privacyScopeText" class="text-success">N/A</strong>.
+                        </div>
+                    </div>
+                </div>
+
+                <ul class="nav nav-pills mb-3" id="facultyPortalTabs">
+                    <li class="nav-item" id="facultyNavStudentsTab">
+                        <button class="nav-link active" data-bs-toggle="pill" data-bs-target="#facultyStudentsPane"><i class="bi bi-people me-1"></i> Student Verification & Management</button>
+                    </li>
+                    <li class="nav-item" id="facultyNavAwardsTab">
+                        <button class="nav-link" data-bs-toggle="pill" data-bs-target="#facultyAwardsPane"><i class="bi bi-trophy me-1"></i> Award Nominees & Voting</button>
+                    </li>
+                    <li class="nav-item" id="facultyNavAlumniTab" style="display: none;">
+                        <button class="nav-link" data-bs-toggle="pill" data-bs-target="#facultyAlumniPane"><i class="bi bi-mortarboard me-1"></i> Alumni Directory & Oversight</button>
+                    </li>
                 </ul>
+
+                <div class="tab-content">
+                    <div class="tab-pane fade show active" id="facultyStudentsPane">
+                        <div class="card card-custom p-4">
+                            <div class="table-responsive">
+                                <table class="table table-striped align-middle small">
+                                    <thead class="table-light">
+                                        <tr>
+                                            <th>Name</th>
+                                            <th>Student ID / Phone</th>
+                                            <th>Dept, Year & Class</th>
+                                            <th>CGPA</th>
+                                            <th>Status</th>
+                                            <th>Actions</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="facultyStudentTable">
+                                        <!-- Populated dynamically -->
+                                    </tbody>
+                                </table>
+                            </div>
+
+                            <div class="mt-4 pt-3 border-top d-flex justify-content-between align-items-center" id="facultyBatchGraduationWrapper">
+                                <small class="text-muted"><i class="bi bi-info-circle me-1"></i> Ready to graduate all verified students in this assigned class?</small>
+                                <button class="btn btn-success fw-bold px-4 btn-sm" onclick="executeBatchGraduation()"><i class="bi bi-mortarboard-fill me-1"></i> Execute Entire Batch Graduation</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="tab-pane fade" id="facultyAwardsPane">
+                        <div class="card card-custom p-4">
+                            <h6 class="fw-bold mb-3"><i class="bi bi-award text-success me-2"></i>Class Award Nominees & Voting (Verified Students)</h6>
+                            <div class="table-responsive">
+                                <table class="table table-striped align-middle small">
+                                    <thead class="table-light">
+                                        <tr>
+                                            <th>Category</th>
+                                            <th>Nominee Name</th>
+                                            <th>CGPA / Metrics</th>
+                                            <th>Faculty Votes</th>
+                                            <th>Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="facultyAwardTable">
+                                        <!-- Populated dynamically -->
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="tab-pane fade" id="facultyAlumniPane">
+                        <div class="card card-custom p-4">
+                            <h6 class="fw-bold mb-3"><i class="bi bi-mortarboard-fill text-success me-2"></i>Institutional Alumni Directory & Management</h6>
+                            <div class="table-responsive">
+                                <table class="table table-striped align-middle small">
+                                    <thead class="table-light">
+                                        <tr>
+                                            <th>Alumni Name</th>
+                                            <th>Unique Alumni ID</th>
+                                            <th>Company</th>
+                                            <th>Designation</th>
+                                            <th>CTC / Package</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="facultyAlumniTable">
+                                        <!-- Populated dynamically -->
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
 
-        <!-- Alumni Portal -->
-        <div id="alumniSection" class="dashboard-section">
-            <div class="row g-3">
-                <div class="col-md-6">
-                    <div class="card card-custom p-4 h-100">
-                        <h6 class="fw-bold mb-3"><i class="bi bi-people-fill text-info me-2"></i>Alumni Directory</h6>
-                        <ul class="list-group list-group-flush small" id="alumniDirectoryList">
-                            <li class="list-group-item d-flex justify-content-between align-items-center py-3">
-                                <div>
-                                    <strong>Ashil George</strong> (Batch 2025)<br>
-                                    <span class="text-muted">Software Engineer @ TechCorp</span>
+        <!-- Admin Portal Section (Restricted Strictly to Faculty Oversight) -->
+        <div id="adminSection" class="dashboard-section">
+            <div id="adminGatekeeperView">
+                <div class="row justify-content-center">
+                    <div class="col-md-5">
+                        <div class="card card-custom p-4 shadow-sm border-warning">
+                            <div class="text-center mb-3">
+                                <div class="p-3 bg-warning-subtle text-warning rounded-circle d-inline-block mb-2">
+                                    <i class="bi bi-gear-fill fs-2"></i>
                                 </div>
-                                <span class="badge bg-info-subtle text-info border border-info-subtle"><i class="bi bi-currency-rupee"></i> ₹12.5 LPA (Optional)</span>
-                            </li>
-                            <li class="list-group-item d-flex justify-content-between align-items-center py-3">
-                                <div>
-                                    <strong>Aadi Shetty</strong> (Batch 2025)<br>
-                                    <span class="text-muted">Data Analyst @ Analytics Inc</span>
+                                <h5 class="fw-bold text-dark">Admin Portal Gateway</h5>
+                                <p class="small text-muted m-0">Enter institutional administrator master credentials.</p>
+                            </div>
+                            <form onsubmit="verifyAdminLogin(event)">
+                                <div class="mb-2">
+                                    <label class="form-label">Admin Username</label>
+                                    <input type="text" id="adminUser" class="form-control" placeholder="admin" required>
                                 </div>
-                                <span class="badge bg-secondary-subtle text-secondary">CTC: Undisclosed</span>
-                            </li>
-                        </ul>
+                                <div class="mb-3">
+                                    <label class="form-label">Master Password</label>
+                                    <input type="password" id="adminPass" class="form-control" placeholder="admin123" required>
+                                </div>
+                                <button type="submit" class="btn btn-warning text-dark w-100 fw-bold py-2"><i class="bi bi-shield-shaded me-1"></i> Access Faculty Control Panel</button>
+                            </form>
+                        </div>
                     </div>
                 </div>
-                <div class="col-md-6">
-                    <div class="card card-custom p-4 h-100">
-                        <h6 class="fw-bold mb-3"><i class="bi bi-briefcase-fill text-primary me-2"></i>Post Career Referral</h6>
-                        <form onsubmit="postJobReferral(event)">
-                            <div class="mb-2">
-                                <label class="form-label">Job Title</label>
-                                <input type="text" id="jobTitle" class="form-control" placeholder="Graduate Engineer Trainee" required>
+            </div>
+
+            <div id="adminDashboardView" style="display: none;">
+                <div class="d-flex justify-content-between align-items-center mb-4">
+                    <div>
+                        <h4 class="fw-bold m-0"><i class="bi bi-gear-fill text-warning me-2"></i>Institutional Administration Panel</h4>
+                        <small class="text-muted">Dedicated Faculty Oversight & Security Access Control.</small>
+                    </div>
+                    <button class="btn btn-outline-danger btn-sm fw-bold" onclick="openPortalAccess('admin')"><i class="bi bi-box-arrow-right me-1"></i> Logout Admin</button>
+                </div>
+
+                <div class="row g-3 mb-4">
+                    <div class="col-md-6">
+                        <div class="card card-custom stat-card p-3" style="border-left-color: #10b981;">
+                            <div class="text-muted small">Logged-In / Registered Faculty Count</div>
+                            <h3 class="fw-bold text-success m-0" id="adminStatTotalFaculty">0</h3>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="card card-custom stat-card p-3" style="border-left-color: #2563eb;">
+                            <div class="text-muted small">Active Academic Year</div>
+                            <h3 class="fw-bold text-primary m-0">2026</h3>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card card-custom p-4 mb-4">
+                    <h6 class="fw-bold mb-3"><i class="bi bi-shield-check text-success me-2"></i>Logged-In Faculty Review & Access Control</h6>
+                    <p class="small text-muted mb-3">Review active faculty members who have logged in/signed up. You can verify accounts or revoke access if tampering is suspected.</p>
+                    <div class="table-responsive">
+                        <table class="table table-striped align-middle small">
+                            <thead class="table-light">
+                                <tr>
+                                    <th>Faculty Name</th>
+                                    <th>Staff ID</th>
+                                    <th>Department & Scope</th>
+                                    <th>Access Status</th>
+                                    <th>Admin Actions (Verify / Revoke Access)</th>
+                                </tr>
+                            </thead>
+                            <tbody id="adminFacultyTable">
+                                <!-- Populated dynamically -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Alumni Portal Section -->
+        <div id="alumniSection" class="dashboard-section">
+            <div id="alumniGatekeeperView">
+                <div class="row justify-content-center">
+                    <div class="col-md-6">
+                        <div class="card card-custom p-4 shadow-sm border-info">
+                            <div class="text-center mb-3">
+                                <div class="p-3 bg-info-subtle text-info rounded-circle d-inline-block mb-2">
+                                    <i class="bi bi-person-badge-fill fs-2"></i>
+                                </div>
+                                <h5 class="fw-bold text-dark">Alumni Portal Access</h5>
+                                <p class="small text-muted m-0">Enter your official 10-digit Student ID and password.</p>
                             </div>
-                            <div class="mb-2">
-                                <label class="form-label">Company Name</label>
-                                <input type="text" id="jobCompany" class="form-control" placeholder="Enterprise Tech Systems" required>
+
+                            <ul class="nav nav-pills nav-fill mb-3 bg-light p-1 rounded" id="alumniAuthTabs">
+                                <li class="nav-item">
+                                    <button class="nav-link active fw-bold py-1 small" onclick="switchAlumniAuthMode('signup')">Signup (New)</button>
+                                </li>
+                                <li class="nav-item">
+                                    <button class="nav-link fw-bold py-1 small" onclick="switchAlumniAuthMode('login')">Login (Existing ID)</button>
+                                </li>
+                            </ul>
+
+                            <div id="alumniErrorAlert" class="alert alert-danger mb-3 small" style="display: none;">
+                                <i class="bi bi-exclamation-triangle-fill me-1"></i> <span id="alumniErrorText">Error: Invalid alumni credentials.</span>
                             </div>
-                            <div class="mb-3">
-                                <label class="form-label">Annual Salary / Package (Optional CTC)</label>
-                                <input type="text" id="jobSalary" class="form-control" placeholder="e.g. ₹8.5 - 10 LPA">
+
+                            <form id="alumniSignupForm" onsubmit="verifyAlumniSignup(event)">
+                                <div class="mb-2">
+                                    <label class="form-label">Full Name</label>
+                                    <input type="text" id="signupName" class="form-control" placeholder="e.g. Ashil George" required>
+                                </div>
+                                <div class="mb-2">
+                                    <label class="form-label">10-Digit Student ID</label>
+                                    <input type="text" id="signupId" class="form-control" placeholder="e.g. 2026010051" maxlength="10" minlength="10" required>
+                                </div>
+                                <div class="mb-3">
+                                    <label class="form-label">Set Account Password</label>
+                                    <input type="password" id="signupPassword" class="form-control" placeholder="Create a secure password" required>
+                                </div>
+                                <button type="submit" class="btn btn-info text-white w-100 fw-bold py-2"><i class="bi bi-person-plus-fill me-1"></i> Verify & Create Profile</button>
+                            </form>
+
+                            <form id="alumniLoginForm" onsubmit="verifyAlumniLogin(event)" style="display: none;">
+                                <div class="mb-2">
+                                    <label class="form-label">Unique Alumni ID</label>
+                                    <input type="text" id="loginUniqueId" class="form-control" placeholder="e.g. ALM-2026-XXXX" required>
+                                </div>
+                                <div class="mb-3">
+                                    <label class="form-label">Password</label>
+                                    <input type="password" id="loginPassword" class="form-control" placeholder="Enter your password" required>
+                                </div>
+                                <button type="submit" class="btn btn-primary w-100 fw-bold py-2"><i class="bi bi-box-arrow-in-right me-1"></i> Login & Update Details</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="alumniCreationDashboardView" style="display: none;">
+                <div class="row justify-content-center">
+                    <div class="col-md-7">
+                        <div class="card card-custom p-4 border-success shadow-sm">
+                            <div class="d-flex justify-content-between align-items-center mb-3">
+                                <h5 class="fw-bold text-success m-0"><i class="bi bi-person-plus-fill me-1"></i> Create Alumni Profile</h5>
+                                <span class="badge bg-success-subtle text-success">Verified: <span id="creationVerifiedName"></span></span>
                             </div>
-                            <button type="submit" class="btn btn-info text-white w-100 fw-bold"><i class="bi bi-send me-1"></i> Post Referral</button>
-                        </form>
+                            <p class="small text-muted mb-4">Complete your professional details. Submitting generates your confidential Unique Alumni ID.</p>
+                            
+                            <form onsubmit="submitFirstAlumniProfile(event)">
+                                <div class="mb-3">
+                                    <label class="form-label">Full Name</label>
+                                    <input type="text" id="createFormName" class="form-control" readonly>
+                                </div>
+                                <div class="mb-3">
+                                    <label class="form-label">Company Name</label>
+                                    <input type="text" id="createFormCompany" class="form-control" placeholder="e.g. TechCorp" required>
+                                </div>
+                                <div class="mb-3">
+                                    <label class="form-label">Designation / Role</label>
+                                    <input type="text" id="createFormDesignation" class="form-control" placeholder="e.g. Software Engineer" required>
+                                </div>
+                                <div class="mb-3">
+                                    <label class="form-label">Annual Package / CTC (₹)</label>
+                                    <input type="text" id="createFormPackage" class="form-control" placeholder="e.g. ₹12.5 LPA" required>
+                                </div>
+                                <button type="submit" class="btn btn-success w-100 fw-bold py-2"><i class="bi bi-check-circle-fill me-1"></i> Submit Profile & Generate ID</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="alumniManageDashboardView" style="display: none;">
+                <div class="row justify-content-center">
+                    <div class="col-md-7">
+                        <div class="card card-custom p-4 shadow-sm">
+                            <div class="d-flex justify-content-between align-items-center mb-4">
+                                <h5 class="fw-bold text-primary m-0"><i class="bi bi-pencil-square me-1"></i> Update My Professional Details</h5>
+                                <span class="badge bg-success-subtle text-success">Unique ID: <strong id="managedUniqueIdBadge"></strong></span>
+                            </div>
+                            <form onsubmit="updateAlumniDetails(event)">
+                                <div class="mb-3">
+                                    <label class="form-label">Full Name</label>
+                                    <input type="text" id="manageFormName" class="form-control" readonly>
+                                </div>
+                                <div class="mb-3">
+                                    <label class="form-label">Company Name</label>
+                                    <input type="text" id="manageFormCompany" class="form-control" required>
+                                </div>
+                                <div class="mb-3">
+                                    <label class="form-label">Designation</label>
+                                    <input type="text" id="manageFormDesignation" class="form-control" required>
+                                </div>
+                                <div class="mb-3">
+                                    <label class="form-label">Annual Package / CTC (₹)</label>
+                                    <input type="text" id="manageFormPackage" class="form-control" required>
+                                </div>
+                                <button type="submit" class="btn btn-primary w-100 fw-bold py-2"><i class="bi bi-save me-1"></i> Update Record</button>
+                            </form>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -578,188 +926,749 @@
     <!-- Bootstrap 5 JS Bundle -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script>
-        let voteCounts = { '55': 1, '62': 2, '61': 3 };
-        let activeCount = 5;
-        let alumniCount = 2;
-        let isRegistered = false;
+        let currentVerifiedStudentKey = null;
+        let currentVerifiedFacultyKey = null;
+        let voteCounts = { '2026010061': 3, '2026010049': 2 };
+
+        // Active Seniors (Students): Shreyash Patil (You) + 2 Team Members (Ashil George & Aadi Shetty)
+        let studentDb = [
+            { name: "Shreyash Patil", stuid: "2026010061", dept: "Computer Engineering", year: "BE", cls: "C", phone: "+91 9876543213", cgpa: "9.20", password: "password123", status: "Verified", registered: true },
+            { name: "Ashil George", stuid: "2026010051", dept: "Computer Engineering", year: "BE", cls: "C", phone: "+91 9876543211", cgpa: "8.75", password: "password123", status: "Verified", registered: true },
+            { name: "Aadi Shetty", stuid: "2026010049", dept: "Computer Engineering", year: "BE", cls: "C", phone: "+91 9876543210", cgpa: "8.90", password: "password123", status: "Verified", registered: true }
+        ];
+
+        let staffDb = [
+            { name: "Priti Andhale", staffid: "FAC-STAFF-01", password: "admin123", registered: false, status: "Active" },
+            { name: "Nazarath Remedios", staffid: "FAC-STAFF-02", password: "admin123", registered: false, status: "Active" },
+            { name: "Alumni Coordinator", staffid: "FAC-STAFF-03", password: "admin123", registered: false, status: "Active" }
+        ];
+
+        let facultyProfiles = {};
+
+        let studentProfiles = {
+            "shreyash patil": { name: "Shreyash Patil", stuid: "2026010061", phone: "+91 9876543213", dob: "2004-05-15", gender: "Male", address: "Mumbai, Maharashtra", dept: "Computer Engineering", year: "BE", cls: "C", cgpa: "9.20", attendance: "88.5%", achievements: "Full Stack Mini Project Lead", memory: "Grateful for four incredible years!" },
+            "ashil george": { name: "Ashil George", stuid: "2026010051", phone: "+91 9876543211", dob: "2004-03-12", gender: "Male", address: "Mumbai, Maharashtra", dept: "Computer Engineering", year: "BE", cls: "C", cgpa: "8.75", attendance: "82.4%", achievements: "Algorithm Contest Winner", memory: "Great learning experience!" },
+            "aadi shetty": { name: "Aadi Shetty", stuid: "2026010049", phone: "+91 9876543210", dob: "2004-06-20", gender: "Male", address: "Mumbai, Maharashtra", dept: "Computer Engineering", year: "BE", cls: "C", cgpa: "8.90", attendance: "85.0%", achievements: "Full Stack Web Project Lead", memory: "Memorable interactions." }
+        };
+
+        // Graduated Alumni: Remaining 2 Team Members (Rahul Kumar & Sameer Bagayatkar) pre-populated
+        let alumniRecords = {
+            "rahul kumar": { name: "Rahul Kumar", uniqueId: "ALM-2026-1042", password: "password123", company: "TechCorp", designation: "Software Engineer", package: "₹12.0 LPA", created: true },
+            "sameer bagayatkar": { name: "Sameer Bagayatkar", uniqueId: "ALM-2026-1085", password: "password123", company: "CloudSystems", designation: "DevOps Engineer", package: "₹14.0 LPA", created: true }
+        };
+
+        function openPortalAccess(role) {
+            if (role === 'student') {
+                document.getElementById('studentGatekeeperView').style.display = 'block';
+                document.getElementById('studentFormView').style.display = 'none';
+                document.getElementById('studentProfileView').style.display = 'none';
+                document.getElementById('studentErrorAlert').style.display = 'none';
+                switchStudentAuthMode('signup');
+                switchRole('student');
+            } else if (role === 'faculty') {
+                document.getElementById('facultyGatekeeperView').style.display = 'block';
+                document.getElementById('facultyCreationDashboardView').style.display = 'none';
+                document.getElementById('facultyMainDashboardView').style.display = 'none';
+                document.getElementById('facultyErrorAlert').style.display = 'none';
+                switchFacultyAuthMode('signup');
+                switchRole('faculty');
+            } else if (role === 'admin') {
+                document.getElementById('adminGatekeeperView').style.display = 'block';
+                document.getElementById('adminDashboardView').style.display = 'none';
+                switchRole('admin');
+            } else if (role === 'alumni') {
+                document.getElementById('alumniGatekeeperView').style.display = 'block';
+                document.getElementById('alumniCreationDashboardView').style.display = 'none';
+                document.getElementById('alumniManageDashboardView').style.display = 'none';
+                document.getElementById('alumniErrorAlert').style.display = 'none';
+                switchAlumniAuthMode('signup');
+                switchRole('alumni');
+            }
+        }
+
+        function switchStudentAuthMode(mode) {
+            document.getElementById('studentErrorAlert').style.display = 'none';
+            let buttons = document.querySelectorAll('#studentAuthTabs .nav-link');
+            buttons.forEach(b => b.classList.remove('active'));
+
+            if (mode === 'signup') {
+                buttons[0].classList.add('active');
+                document.getElementById('studentSignupForm').style.display = 'block';
+                document.getElementById('studentLoginForm').style.display = 'none';
+            } else {
+                buttons[1].classList.add('active');
+                document.getElementById('studentSignupForm').style.display = 'none';
+                document.getElementById('studentLoginForm').style.display = 'block';
+            }
+        }
+
+        function switchFacultyAuthMode(mode) {
+            document.getElementById('facultyErrorAlert').style.display = 'none';
+            let buttons = document.querySelectorAll('#facultyAuthTabs .nav-link');
+            buttons.forEach(b => b.classList.remove('active'));
+
+            if (mode === 'signup') {
+                buttons[0].classList.add('active');
+                document.getElementById('facultySignupForm').style.display = 'block';
+                document.getElementById('facultyLoginForm').style.display = 'none';
+            } else {
+                buttons[1].classList.add('active');
+                document.getElementById('facultySignupForm').style.display = 'none';
+                document.getElementById('facultyLoginForm').style.display = 'block';
+            }
+        }
+
+        function switchAlumniAuthMode(mode) {
+            document.getElementById('alumniErrorAlert').style.display = 'none';
+            let buttons = document.querySelectorAll('#alumniAuthTabs .nav-link');
+            buttons.forEach(b => b.classList.remove('active'));
+
+            if (mode === 'signup') {
+                buttons[0].classList.add('active');
+                document.getElementById('alumniSignupForm').style.display = 'block';
+                document.getElementById('alumniLoginForm').style.display = 'none';
+            } else {
+                buttons[1].classList.add('active');
+                document.getElementById('alumniSignupForm').style.display = 'none';
+                document.getElementById('alumniLoginForm').style.display = 'block';
+            }
+        }
 
         function switchRole(role) {
             document.querySelectorAll('.dashboard-section').forEach(sec => sec.classList.remove('active-section'));
+            let mainNavbar = document.getElementById('mainNavbar');
+
             if(role === 'login') {
                 document.getElementById('loginSection').classList.add('active-section');
-                document.getElementById('userRoleBadge').innerHTML = `<i class="bi bi-person-circle me-1"></i> Mode: Role Selection`;
+                if(mainNavbar) mainNavbar.style.display = 'none'; // Strictly hidden on main landing home screen
             } else {
-                document.getElementById(role + 'Section').classList.add('active-section');
-                document.getElementById('userRoleBadge').innerHTML = `<i class="bi bi-person-check-fill me-1"></i> Role: ${role.toUpperCase()}`;
+                if(mainNavbar) mainNavbar.style.display = 'flex'; // Visible only inside active portals
+                if(role === 'student') {
+                    document.getElementById('studentSection').classList.add('active-section');
+                } else if(role === 'faculty') {
+                    document.getElementById('facultySection').classList.add('active-section');
+                } else if(role === 'admin') {
+                    document.getElementById('adminSection').classList.add('active-section');
+                } else if(role === 'alumni') {
+                    document.getElementById('alumniSection').classList.add('active-section');
+                }
+            }
+        }
+
+        // FACULTY GATEWAY & DASHBOARD
+        function verifyFacultySignup(event) {
+            event.preventDefault();
+            let inputName = document.getElementById('facSignupName').value.trim();
+            let inputStaffId = document.getElementById('facSignupStaffId').value.trim();
+            let inputPassword = document.getElementById('facSignupPassword').value;
+
+            let matchedStaff = staffDb.find(s => s.staffid === inputStaffId);
+            if (!matchedStaff || matchedStaff.status === 'Revoked') {
+                document.getElementById('facultyErrorText').innerText = "Security Error: Staff ID not found or access has been revoked.";
+                document.getElementById('facultyErrorAlert').style.display = 'block';
+                return;
+            }
+
+            if (matchedStaff.name.toLowerCase() !== inputName.toLowerCase()) {
+                document.getElementById('facultyErrorText').innerText = "Security Error: Entered Name does not match this Staff ID in institutional records.";
+                document.getElementById('facultyErrorAlert').style.display = 'block';
+                return;
+            }
+
+            document.getElementById('facultyErrorAlert').style.display = 'none';
+            currentVerifiedFacultyKey = inputStaffId;
+            matchedStaff.password = inputPassword;
+            matchedStaff.registered = true;
+
+            if (facultyProfiles[currentVerifiedFacultyKey] && facultyProfiles[currentVerifiedFacultyKey].registered) {
+                document.getElementById('facultyGatekeeperView').style.display = 'none';
+                let fac = facultyProfiles[currentVerifiedFacultyKey];
+                loadFacultyDashboard(fac);
+                alert(`Welcome back, ${fac.name}!`);
+            } else {
+                document.getElementById('facultyGatekeeperView').style.display = 'none';
+                document.getElementById('facultyCreationDashboardView').style.display = 'block';
+                document.getElementById('facCreationVerifiedName').innerText = matchedStaff.name;
+                document.getElementById('facCreateFormName').value = matchedStaff.name;
+                document.getElementById('facCreateFormStaffId').value = matchedStaff.staffid;
+            }
+        }
+
+        function verifyFacultyLogin(event) {
+            event.preventDefault();
+            let loginStaffId = document.getElementById('facLoginStaffId').value.trim();
+            let loginPass = document.getElementById('facLoginPassword').value;
+
+            let matchedStaff = staffDb.find(s => s.staffid === loginStaffId);
+            if (!matchedStaff || matchedStaff.status === 'Revoked' || matchedStaff.password !== loginPass) {
+                document.getElementById('facultyErrorText').innerText = "Error: Invalid Staff ID, incorrect password, or access revoked.";
+                document.getElementById('facultyErrorAlert').style.display = 'block';
+                return;
+            }
+
+            document.getElementById('facultyErrorAlert').style.display = 'none';
+            currentVerifiedFacultyKey = loginStaffId;
+            matchedStaff.registered = true;
+
+            if (!facultyProfiles[currentVerifiedFacultyKey]) {
+                facultyProfiles[currentVerifiedFacultyKey] = {
+                    name: matchedStaff.name,
+                    staffid: matchedStaff.staffid,
+                    password: matchedStaff.password,
+                    dept: matchedStaff.staffid === 'FAC-STAFF-03' ? 'Alumni Association' : 'Computer Engineering',
+                    assignedYear: matchedStaff.staffid === 'FAC-STAFF-03' ? 'All' : 'BE',
+                    assignedClass: matchedStaff.staffid === 'FAC-STAFF-03' ? 'All' : 'C',
+                    email: `${matchedStaff.staffid.toLowerCase()}@institution.edu`,
+                    registered: true
+                };
+            }
+
+            let fac = facultyProfiles[currentVerifiedFacultyKey];
+            document.getElementById('facultyGatekeeperView').style.display = 'none';
+            loadFacultyDashboard(fac);
+            alert(`Login Successful! Welcome back, ${fac.name}.`);
+        }
+
+        function toggleFacultyAssignmentFields() {
+            let dept = document.getElementById('facCreateFormDept').value;
+            let scopeContainer = document.getElementById('facultyClassScopeContainer');
+            if (dept === 'Alumni Association') {
+                scopeContainer.style.display = 'none';
+            } else {
+                scopeContainer.style.display = 'flex';
+            }
+        }
+
+        function submitFirstFacultyProfile(event) {
+            event.preventDefault();
+            if (!currentVerifiedFacultyKey) return;
+
+            let staffId = document.getElementById('facCreateFormStaffId').value;
+            let dept = document.getElementById('facCreateFormDept').value;
+            let email = document.getElementById('facCreateFormEmail').value;
+            
+            let year = dept === 'Alumni Association' ? 'All' : document.getElementById('facCreateFormYear').value;
+            let cls = dept === 'Alumni Association' ? 'All' : document.getElementById('facCreateFormClass').value;
+            let matchedStaff = staffDb.find(s => s.staffid === staffId);
+            if(matchedStaff) matchedStaff.registered = true;
+
+            facultyProfiles[currentVerifiedFacultyKey] = {
+                name: document.getElementById('facCreateFormName').value,
+                staffid: staffId,
+                password: matchedStaff ? matchedStaff.password : "admin123",
+                dept: dept,
+                assignedYear: year,
+                assignedClass: cls,
+                email: email,
+                registered: true
+            };
+
+            let fac = facultyProfiles[currentVerifiedFacultyKey];
+            alert(`Registration Complete! Assigned Role: ${fac.dept}`);
+
+            document.getElementById('facultyCreationDashboardView').style.display = 'none';
+            loadFacultyDashboard(fac);
+        }
+
+        function loadFacultyDashboard(fac) {
+            document.getElementById('facultyMainDashboardView').style.display = 'block';
+            document.getElementById('facultyLoggedInName').innerText = fac.name;
+
+            document.getElementById('dropdownFacName').innerText = fac.name;
+            document.getElementById('dropdownFacStaffId').innerText = `ID: ${fac.staffid}`;
+            document.getElementById('dropdownFacDept').innerText = fac.dept;
+
+            document.getElementById('updateFacName').value = fac.name;
+            document.getElementById('updateFacEmail').value = fac.email || "faculty@institution.edu";
+            document.getElementById('updateFacDept').value = fac.dept;
+            document.getElementById('updateFacYear').value = fac.assignedYear;
+            document.getElementById('updateFacClass').value = fac.assignedClass;
+
+            if (fac.dept === 'Alumni Association') {
+                document.getElementById('assignedClassBadge').innerText = "Alumni Association Oversight";
+                document.getElementById('privacyScopeText').innerText = "Institutional Alumni Network";
+                document.getElementById('dropdownFacScope').innerText = "Alumni Association Oversight";
+                
+                document.getElementById('facultyNavStudentsTab').style.display = 'none';
+                document.getElementById('facultyNavAwardsTab').style.display = 'none';
+                document.getElementById('facultyNavAlumniTab').style.display = 'block';
+                document.getElementById('facultyBatchGraduationWrapper').style.display = 'none';
+
+                document.querySelector('#facultyPortalTabs button[data-bs-target="#facultyAlumniPane"]').click();
+                renderFacultyAlumniTable();
+            } else {
+                let scopeText = `${fac.assignedYear} - Class ${fac.assignedClass}`;
+                document.getElementById('assignedClassBadge').innerText = scopeText;
+                document.getElementById('privacyScopeText').innerText = `${fac.dept} (${scopeText})`;
+                document.getElementById('dropdownFacScope').innerText = `${fac.dept} (${scopeText})`;
+
+                document.getElementById('facultyNavStudentsTab').style.display = 'block';
+                document.getElementById('facultyNavAwardsTab').style.display = 'block';
+                document.getElementById('facultyNavAlumniTab').style.display = 'none';
+                document.getElementById('facultyBatchGraduationWrapper').style.display = 'flex';
+
+                document.querySelector('#facultyPortalTabs button[data-bs-target="#facultyStudentsPane"]').click();
+                renderFacultyStudentTable(fac.dept, fac.assignedYear, fac.assignedClass);
+                renderFacultyAwardTable(fac.dept, fac.assignedYear, fac.assignedClass);
+            }
+        }
+
+        function openFacultyUpdateModal() {
+            document.getElementById('facultyProfileUpdateCard').style.display = 'block';
+        }
+
+        function closeFacultyUpdateModal() {
+            document.getElementById('facultyProfileUpdateCard').style.display = 'none';
+        }
+
+        function saveFacultyProfileUpdate(event) {
+            event.preventDefault();
+            if (!currentVerifiedFacultyKey || !facultyProfiles[currentVerifiedFacultyKey]) return;
+
+            let fac = facultyProfiles[currentVerifiedFacultyKey];
+            fac.name = document.getElementById('updateFacName').value;
+            fac.email = document.getElementById('updateFacEmail').value;
+            fac.dept = document.getElementById('updateFacDept').value;
+            fac.assignedYear = document.getElementById('updateFacYear').value;
+            fac.assignedClass = document.getElementById('updateFacClass').value;
+
+            loadFacultyDashboard(fac);
+            closeFacultyUpdateModal();
+            alert('Faculty profile updated successfully!');
+        }
+
+        function logoutFacultySession() {
+            currentVerifiedFacultyKey = null;
+            document.getElementById('facultyMainDashboardView').style.display = 'none';
+            document.getElementById('facultyProfileUpdateCard').style.display = 'none';
+            document.getElementById('facultyGatekeeperView').style.display = 'block';
+            switchFacultyAuthMode('login');
+            alert('Faculty logged out successfully.');
+        }
+
+        function renderFacultyStudentTable(dept, year, assignedClass) {
+            let tableBody = document.getElementById('facultyStudentTable');
+            tableBody.innerHTML = "";
+
+            let filteredStudents = studentDb.filter(s => s.dept === dept && s.year === year && s.cls === assignedClass);
+
+            if (filteredStudents.length === 0) {
+                tableBody.innerHTML = `<tr><td colspan="6" class="text-center text-muted py-3">No students registered under ${year} Class ${assignedClass} yet.</td></tr>`;
+                return;
+            }
+
+            filteredStudents.forEach(s => {
+                let statusBadge = s.status === 'Verified' ? '<span class="badge bg-success">Verified</span>' : 
+                                  s.status === 'Graduated' ? '<span class="badge bg-info">Graduated Student</span>' : 
+                                  '<span class="badge bg-warning text-dark">Pending Verification</span>';
+
+                let actionButtons = '';
+                if(s.status === 'Pending') {
+                    actionButtons += `<button class="btn btn-sm btn-success me-1 mb-1" onclick="verifyStudentRecord('${s.stuid}')"><i class="bi bi-check-lg"></i> Verify</button>`;
+                    actionButtons += `<button class="btn btn-sm btn-outline-danger mb-1" onclick="removeStudentRecord('${s.stuid}')"><i class="bi bi-trash"></i> Remove</button>`;
+                } else if(s.status === 'Verified') {
+                    actionButtons += `<button class="btn btn-sm btn-outline-primary me-1 mb-1" onclick="graduateSingleStudent('${s.stuid}')"><i class="bi bi-mortarboard"></i> Graduate</button>`;
+                } else if(s.status === 'Graduated') {
+                    actionButtons += `<button class="btn btn-sm btn-outline-warning me-1 mb-1" onclick="revertStudentToSenior('${s.stuid}')"><i class="bi bi-arrow-counterclockwise"></i> Revert to Senior</button>`;
+                }
+
+                let row = document.createElement('tr');
+                row.innerHTML = `
+                    <td><strong>${s.name}</strong></td>
+                    <td>${s.stuid}<br><small class="text-muted">${s.phone}</small></td>
+                    <td>${s.dept} <br><span class="badge bg-light text-dark border">${s.year} - Class ${s.cls}</span></td>
+                    <td>${s.cgpa}</td>
+                    <td>${statusBadge}</td>
+                    <td>${actionButtons}</td>
+                `;
+                tableBody.appendChild(row);
+            });
+        }
+
+        function renderFacultyAwardTable(dept, year, assignedClass) {
+            let tableBody = document.getElementById('facultyAwardTable');
+            tableBody.innerHTML = "";
+
+            let eligibleStudents = studentDb.filter(s => s.dept === dept && s.year === year && s.cls === assignedClass && s.status === 'Verified');
+
+            if (eligibleStudents.length === 0) {
+                tableBody.innerHTML = `<tr><td colspan="5" class="text-center text-muted py-3">No verified award nominees available for this class yet.</td></tr>`;
+                return;
+            }
+
+            let categories = ["Academic Excellence", "Best All-Rounder", "Technical Innovator"];
+
+            eligibleStudents.forEach((s, index) => {
+                let cat = categories[index % categories.length];
+                let count = voteCounts[s.stuid] || 1;
+                let row = document.createElement('tr');
+                row.innerHTML = `
+                    <td><span class="fw-bold">${cat}</span></td>
+                    <td>${s.name}</td>
+                    <td>CGPA: ${s.cgpa}</td>
+                    <td><span id="vote-${s.stuid}" class="badge bg-secondary">${count} Votes</span></td>
+                    <td><button class="btn btn-sm btn-outline-success" onclick="voteForNominee('${s.stuid}')"><i class="bi bi-hand-thumbs-up me-1"></i> Vote</button></td>
+                `;
+                tableBody.appendChild(row);
+            });
+        }
+
+        function renderFacultyAlumniTable() {
+            let tableBody = document.getElementById('facultyAlumniTable');
+            tableBody.innerHTML = "";
+
+            let alumniKeys = Object.keys(alumniRecords);
+            if (alumniKeys.length === 0) {
+                tableBody.innerHTML = `<tr><td colspan="5" class="text-center text-muted py-3">No alumni records found in network.</td></tr>`;
+                return;
+            }
+
+            alumniKeys.forEach(k => {
+                let a = alumniRecords[k];
+                let row = document.createElement('tr');
+                row.innerHTML = `
+                    <td><strong>${a.name}</strong></td>
+                    <td><span class="badge bg-light text-dark border">${a.uniqueId}</span></td>
+                    <td>${a.company}</td>
+                    <td>${a.designation}</td>
+                    <td><span class="badge bg-info-subtle text-info">${a.package}</span></td>
+                `;
+                tableBody.appendChild(row);
+            });
+        }
+
+        function verifyStudentRecord(stuid) {
+            let s = studentDb.find(item => item.stuid === stuid);
+            if(s) {
+                s.status = 'Verified';
+                let fac = facultyProfiles[currentVerifiedFacultyKey];
+                renderFacultyStudentTable(fac.dept, fac.assignedYear, fac.assignedClass);
+                renderFacultyAwardTable(fac.dept, fac.assignedYear, fac.assignedClass);
+                alert(`Student ${s.name} has been verified successfully.`);
+            }
+        }
+
+        function graduateSingleStudent(stuid) {
+            let s = studentDb.find(item => item.stuid === stuid);
+            if(s) {
+                s.status = 'Graduated';
+                alumniRecords[s.name.toLowerCase()] = { name: s.name, uniqueId: "ALM-2026-" + Math.floor(1000 + Math.random() * 9000), password: s.password, company: "Pending Update", designation: "Alumni", package: "N/A", created: true };
+                let fac = facultyProfiles[currentVerifiedFacultyKey];
+                renderFacultyStudentTable(fac.dept, fac.assignedYear, fac.assignedClass);
+                renderFacultyAwardTable(fac.dept, fac.assignedYear, fac.assignedClass);
+                alert(`Student ${s.name} marked as Graduated.`);
+            }
+        }
+
+        function revertStudentToSenior(stuid) {
+            let s = studentDb.find(item => item.stuid === stuid);
+            if(s) {
+                s.status = 'Verified';
+                delete alumniRecords[s.name.toLowerCase()];
+                let fac = facultyProfiles[currentVerifiedFacultyKey];
+                renderFacultyStudentTable(fac.dept, fac.assignedYear, fac.assignedClass);
+                renderFacultyAwardTable(fac.dept, fac.assignedYear, fac.assignedClass);
+                alert(`Student ${s.name} reverted back to Active Senior status successfully.`);
+            }
+        }
+
+        function removeStudentRecord(stuid) {
+            if(confirm("Are you sure you want to remove/delete this student record due to incorrect or tampered details?")) {
+                studentDb = studentDb.filter(item => item.stuid !== stuid);
+                let fac = facultyProfiles[currentVerifiedFacultyKey];
+                renderFacultyStudentTable(fac.dept, fac.assignedYear, fac.assignedClass);
+                renderFacultyAwardTable(fac.dept, fac.assignedYear, fac.assignedClass);
+                alert('Student record removed successfully.');
+            }
+        }
+
+        function executeBatchGraduation() {
+            if(!currentVerifiedFacultyKey) return;
+            let fac = facultyProfiles[currentVerifiedFacultyKey];
+            let count = 0;
+            studentDb.forEach(s => {
+                if(s.dept === fac.dept && s.year === fac.assignedYear && s.cls === fac.assignedClass && s.status === 'Verified') {
+                    s.status = 'Graduated';
+                    alumniRecords[s.name.toLowerCase()] = { name: s.name, uniqueId: "ALM-2026-" + Math.floor(1000 + Math.random() * 9000), password: s.password, company: "Pending Update", designation: "Alumni", package: "N/A", created: true };
+                    count++;
+                }
+            });
+            renderFacultyStudentTable(fac.dept, fac.assignedYear, fac.assignedClass);
+            renderFacultyAwardTable(fac.dept, fac.assignedYear, fac.assignedClass);
+            alert(`Batch Graduation Executed! Successfully graduated ${count} students from ${fac.assignedYear} Class ${fac.assignedClass}.`);
+        }
+
+        function voteForNominee(stuid) {
+            voteCounts[stuid] = (voteCounts[stuid] || 1) + 1;
+            document.getElementById('vote-' + stuid).innerText = voteCounts[stuid] + " Votes";
+            alert('Vote recorded successfully!');
+        }
+
+        // ADMIN GATEWAY & DASHBOARD (Restricted strictly to Faculty Oversight)
+        function verifyAdminLogin(event) {
+            event.preventDefault();
+            let u = document.getElementById('adminUser').value;
+            let p = document.getElementById('adminPass').value;
+
+            if (u === 'admin' && p === 'admin123') {
+                document.getElementById('adminGatekeeperView').style.display = 'none';
+                document.getElementById('adminDashboardView').style.display = 'block';
+                loadAdminDashboard();
+                alert('Admin Login Successful!');
+            } else {
+                alert('Invalid Admin credentials. Use admin / admin123.');
+            }
+        }
+
+        function loadAdminDashboard() {
+            let loggedInStaff = staffDb.filter(staff => staff.registered || facultyProfiles[staff.staffid]);
+            document.getElementById('adminStatTotalFaculty').innerText = loggedInStaff.length;
+
+            let fTbody = document.getElementById('adminFacultyTable');
+            fTbody.innerHTML = "";
+
+            if (loggedInStaff.length === 0) {
+                fTbody.innerHTML = `<tr><td colspan="5" class="text-center text-muted py-3">No faculty members have logged into the portal yet.</td></tr>`;
+                return;
+            }
+
+            loggedInStaff.forEach(staff => {
+                let fProfile = facultyProfiles[staff.staffid];
+                let deptScope = fProfile ? `${fProfile.dept} (${fProfile.assignedYear} Class ${fProfile.assignedClass})` : "Configured";
+                let statusBadge = staff.status === 'Active' ? '<span class="badge bg-success">Active Access</span>' : '<span class="badge bg-danger">Access Revoked</span>';
+                
+                let actionBtn = staff.status === 'Active' ? 
+                    `<button class="btn btn-sm btn-outline-danger" onclick="adminRevokeFaculty('${staff.staffid}')"><i class="bi bi-x-circle me-1"></i> Revoke Access</button>` :
+                    `<button class="btn btn-sm btn-outline-success" onclick="adminRestoreFaculty('${staff.staffid}')"><i class="bi bi-check-circle me-1"></i> Restore Access</button>`;
+
+                let row = document.createElement('tr');
+                row.innerHTML = `
+                    <td><strong>${staff.name}</strong></td>
+                    <td><span class="badge bg-light text-dark border">${staff.staffid}</span></td>
+                    <td>${deptScope}</td>
+                    <td>${statusBadge}</td>
+                    <td>${actionBtn}</td>
+                `;
+                fTbody.appendChild(row);
+            });
+        }
+
+        function adminRevokeFaculty(staffid) {
+            if(confirm(`Admin: Revoke portal access for Staff ID ${staffid}?`)) {
+                let staff = staffDb.find(s => s.staffid === staffid);
+                if(staff) staff.status = 'Revoked';
+                loadAdminDashboard();
+                alert('Faculty access successfully revoked.');
+            }
+        }
+
+        function adminRestoreFaculty(staffid) {
+            let staff = staffDb.find(s => s.staffid === staffid);
+            if(staff) {
+                staff.status = 'Active';
+                loadAdminDashboard();
+                alert('Faculty access restored successfully.');
+            }
+        }
+
+        // STUDENT GATEWAY & REGISTRATION
+        function verifyStudentSignup(event) {
+            event.preventDefault();
+            let inputName = document.getElementById('stuSignupName').value.trim().toLowerCase();
+            let inputId = document.getElementById('stuSignupId').value.trim();
+            let inputPassword = document.getElementById('stuSignupPassword').value;
+
+            if (inputId.length !== 10 || isNaN(inputId)) {
+                document.getElementById('studentErrorText').innerText = "Error: Student ID must be an exact 10-digit number.";
+                document.getElementById('studentErrorAlert').style.display = 'block';
+                return;
+            }
+
+            let match = studentDb.find(s => s.name.toLowerCase() === inputName && s.stuid === inputId);
+
+            if (match) {
+                document.getElementById('studentErrorAlert').style.display = 'none';
+                match.password = inputPassword;
+                currentVerifiedStudentKey = match.name.toLowerCase();
+
+                document.getElementById('studentGatekeeperView').style.display = 'none';
+
+                if (match.registered || studentProfiles[currentVerifiedStudentKey]) {
+                    loadStudentDashboard(studentProfiles[currentVerifiedStudentKey]);
+                    alert(`Welcome back, ${match.name}!`);
+                } else {
+                    document.getElementById('studentFormView').style.display = 'block';
+                    document.getElementById('stuName').value = match.name;
+                    document.getElementById('stuId').value = match.stuid;
+                }
+            } else {
+                document.getElementById('studentErrorText').innerText = "Error: Student ID not found in institutional records.";
+                document.getElementById('studentErrorAlert').style.display = 'block';
+            }
+        }
+
+        function verifyStudentLogin(event) {
+            event.preventDefault();
+            let loginId = document.getElementById('stuLoginId').value.trim();
+            let loginPass = document.getElementById('stuLoginPassword').value;
+
+            let match = studentDb.find(s => s.stuid === loginId && s.password === loginPass);
+
+            if (match) {
+                document.getElementById('studentErrorAlert').style.display = 'none';
+                currentVerifiedStudentKey = match.name.toLowerCase();
+                document.getElementById('studentGatekeeperView').style.display = 'none';
+                loadStudentDashboard(studentProfiles[currentVerifiedStudentKey] || { name: match.name, stuid: match.stuid, cls: match.cls, cgpa: match.cgpa });
+                alert(`Login Successful! Welcome back, ${match.name}.`);
+            } else {
+                document.getElementById('studentErrorText').innerText = "Error: Invalid ID or password.";
+                document.getElementById('studentErrorAlert').style.display = 'block';
             }
         }
 
         function submitStudentRecord(event) {
             event.preventDefault();
+            if (!currentVerifiedStudentKey) return;
+
             let name = document.getElementById('stuName').value;
-            let roll = document.getElementById('stuRoll').value;
             let stuid = document.getElementById('stuId').value;
             let phone = document.getElementById('stuPhone').value;
             let dob = document.getElementById('stuDob').value;
             let gender = document.getElementById('stuGender').value;
             let address = document.getElementById('stuAddress').value;
-            let batch = document.getElementById('stuBatch').value;
+            let dept = document.getElementById('stuDept').value;
+            let year = document.getElementById('stuYear').value;
+            let cls = document.getElementById('stuClass').value;
             let cgpa = document.getElementById('stuCGPA').value;
-            let att = document.getElementById('stuAttendance').value;
             let ach = document.getElementById('stuAchievements').value;
             let mem = document.getElementById('stuMemory').value;
 
-            // Set Registered Flag & Update Views
-            isRegistered = true;
-            document.getElementById('studentFormView').style.display = 'none';
-            document.getElementById('studentProfileView').style.display = 'block';
+            studentProfiles[currentVerifiedStudentKey] = {
+                name, stuid, phone, dob, gender, address, dept, year, cls, cgpa, achievements: ach, memory: mem
+            };
 
-            // Update Profile View Elements
-            document.getElementById('profileName').innerText = name;
-            document.getElementById('profileIds').innerText = `Student ID: ${stuid} | Roll No: ${roll}`;
-            document.getElementById('profileBatch').innerText = batch;
-            document.getElementById('profilePhone').innerText = phone;
-            document.getElementById('profileGenderDob').innerText = `${gender} | ${dob}`;
-            document.getElementById('profileAddress').innerText = address;
-            document.getElementById('profileCGPA').innerText = `${cgpa} / 10.0`;
-            document.getElementById('profileAttendance').innerText = `${att}%`;
-            document.getElementById('profileAchievements').innerText = ach;
-            document.getElementById('profileMemory').innerText = `"${mem}"`;
-
-            // Update Registration Status Header Badge
-            document.getElementById('regStatusBadge').innerHTML = `<span class="badge bg-success-subtle text-success border border-success-subtle px-3 py-2 rounded-pill"><i class="bi bi-check-circle-fill me-1"></i> Record Verified & Registered</span>`;
-
-            // Add row to Faculty Master Table
-            let tbody = document.getElementById('facultyStudentTable');
-            let row = document.createElement('tr');
-            row.innerHTML = `<td>${roll}</td><td>${name}</td><td>${stuid} | ${phone}</td><td>${cgpa}</td><td><span class="badge bg-success-subtle text-success">${att}%</span></td><td>${ach}</td><td>"${mem}"</td>`;
-            tbody.prepend(row);
-
-            // Add row to Admin Table dynamically
-            let adminTable = document.getElementById('adminStudentTable');
-            let adminRow = document.createElement('tr');
-            adminRow.id = `adminRow-${roll}`;
-            adminRow.innerHTML = `<td>${roll}</td><td>${name}</td><td>Computer Engineering</td><td><span class="badge bg-primary" id="adminBadge-${roll}">Active Senior</span></td><td><button class="btn btn-sm btn-outline-success" onclick="toggleStudentStatus('${roll}', '${name}')"><i class="bi bi-box-arrow-up-right me-1"></i> Convert to Alumni</button></td>`;
-            adminTable.prepend(adminRow);
-
-            // Update stats
-            activeCount++;
-            document.getElementById('statActiveCount').innerText = activeCount;
-            document.getElementById('statSubmittedCount').innerText = activeCount;
-
-            logAdminActivity(`New student record submitted: ${name} (Roll ${roll})`);
-            alert('Registration complete! You can now view your verified profile and yearbook memory wall.');
-        }
-
-        function postStudentMemory(event) {
-            event.preventDefault();
-            let text = document.getElementById('memoryInputText').value;
-            let feed = document.getElementById('stuMemoryFeed');
-            let name = document.getElementById('profileName').innerText || "Shreyash Patil";
-
-            let post = document.createElement('div');
-            post.className = "p-3 bg-light rounded border";
-            post.innerHTML = `<div class="d-flex justify-content-between align-items-center mb-1"><strong class="text-primary">${name}</strong><small class="text-muted">Just now</small></div><p class="mb-0 small">"${text}"</p>`;
-            feed.prepend(post);
-
-            document.getElementById('memoryInputText').value = "";
-            alert('Memory note posted on the batch yearbook wall!');
-        }
-
-        function voteForNominee(id) {
-            voteCounts[id]++;
-            document.getElementById('vote-' + id).innerText = voteCounts[id] + " Votes";
-            alert('Vote recorded for Roll No: ' + id);
-        }
-
-        function toggleStudentStatus(roll, name) {
-            let badge = document.getElementById('adminBadge-' + roll);
-            if(badge.innerText === "Active Senior") {
-                badge.className = "badge bg-success";
-                badge.innerText = "Converted Alumni";
-                activeCount--;
-                alumniCount++;
-
-                // Add to Alumni Directory
-                let list = document.getElementById('alumniDirectoryList');
-                let item = document.createElement('li');
-                item.className = "list-group-item d-flex justify-content-between align-items-center py-3";
-                item.innerHTML = `<div><strong>${name}</strong> (Batch 2026)<br><span class="text-muted">Software Trainee</span></div><span class="badge bg-success-subtle text-success">Verified Alumni</span>`;
-                list.prepend(item);
-
-                logAdminActivity(`Individual Status Update: ${name} (Roll ${roll}) converted to Alumni.`);
-            } else {
-                badge.className = "badge bg-primary";
-                badge.innerText = "Active Senior";
-                activeCount++;
-                alumniCount--;
-                logAdminActivity(`Status Reset: ${name} (Roll ${roll}) reset to Active Senior.`);
+            let dbEntry = studentDb.find(s => s.name.toLowerCase() === currentVerifiedStudentKey);
+            if(dbEntry) {
+                dbEntry.registered = true;
+                dbEntry.dept = dept;
+                dbEntry.year = year;
+                dbEntry.cls = cls;
+                dbEntry.status = "Pending";
             }
 
-            document.getElementById('statActiveCount').innerText = activeCount;
-            document.getElementById('statAlumniCount').innerText = alumniCount;
+            document.getElementById('studentFormView').style.display = 'none';
+            loadStudentDashboard(studentProfiles[currentVerifiedStudentKey]);
+            alert('Registration submitted! Your profile is pending faculty verification.');
         }
 
-        function graduateBatch() {
-            let ids = ['49', '51', '55', '61', '62'];
-            ids.forEach(id => {
-                let badge = document.getElementById('adminBadge-' + id);
-                if(badge && badge.innerText === "Active Senior") {
-                    badge.className = "badge bg-success";
-                    badge.innerText = "Converted Alumni";
-                }
-            });
+        function loadStudentDashboard(p) {
+            document.getElementById('studentProfileView').style.display = 'block';
+            document.getElementById('profileName').innerText = p.name;
+            document.getElementById('profileIds').innerText = `Student ID: ${p.stuid}`;
+            document.getElementById('profileClass').innerText = `Active Student (${p.year || 'BE'} - Class ${p.cls || 'C'})`;
+            document.getElementById('profilePhone').innerText = p.phone || "+91 9876543210";
+            document.getElementById('profileGenderDob').innerText = `${p.gender || 'Male'} | ${p.dob || '2004-05-15'}`;
+            document.getElementById('profileAddress').innerText = p.address || "Mumbai";
+            document.getElementById('profileCGPA').innerText = `${p.cgpa} / 10.0`;
+            document.getElementById('profileAttendance').innerText = "88.5%";
+            document.getElementById('profileAchievements').innerText = p.achievements || "Project Lead";
+            document.getElementById('profileMemory').innerText = `"${p.memory || 'Grateful!'}"`;
 
-            alumniCount += activeCount;
-            activeCount = 0;
-            document.getElementById('statActiveCount').innerText = activeCount;
-            document.getElementById('statAlumniCount').innerText = alumniCount;
-
-            logAdminActivity(`Batch Transaction Executed: Entire Batch 2026 converted to Alumni status.`);
-            alert('Batch 2026 successfully transitioned to Alumni Directory!');
+            let dbEntry = studentDb.find(s => s.stuid === p.stuid);
+            let badge = document.getElementById('studentVerificationStatusBadge');
+            if(dbEntry && dbEntry.status === 'Verified') {
+                badge.className = "badge bg-success-subtle text-success border border-success-subtle px-3 py-2 rounded-pill";
+                badge.innerHTML = `<i class="bi bi-check-circle-fill me-1"></i> Verified by Faculty`;
+            } else {
+                badge.className = "badge bg-warning-subtle text-warning border border-warning-subtle px-3 py-2 rounded-pill";
+                badge.innerHTML = `<i class="bi bi-clock-fill me-1"></i> Pending Faculty Verification`;
+            }
         }
 
-        function filterAdminTable() {
-            let input = document.getElementById('adminSearchInput').value.toLowerCase();
-            let filter = document.getElementById('adminStatusFilter').value;
-            let rows = document.querySelectorAll('#adminStudentTable tr');
-
-            rows.forEach(row => {
-                let text = row.innerText.toLowerCase();
-                let status = row.querySelector('.badge') ? row.querySelector('.badge').innerText : '';
-                let matchesSearch = text.includes(input);
-                let matchesFilter = (filter === 'ALL' || status === filter);
-
-                if(matchesSearch && matchesFilter) {
-                    row.style.display = '';
-                } else {
-                    row.style.display = 'none';
-                }
-            });
-        }
-
-        function logAdminActivity(message) {
-            let log = document.getElementById('adminActivityLog');
-            let time = new Date().toLocaleTimeString();
-            let li = document.createElement('li');
-            li.className = "list-group-item";
-            li.innerHTML = `<strong>[${time}]</strong> ${message}`;
-            log.prepend(li);
-        }
-
-        function postJobReferral(event) {
+        // ALUMNI GATEWAY & DASHBOARD
+        let currentVerifiedAlumniKey = null;
+        function verifyAlumniSignup(event) {
             event.preventDefault();
-            let title = document.getElementById('jobTitle').value;
-            let company = document.getElementById('jobCompany').value;
-            let salary = document.getElementById('jobSalary').value || "Undisclosed";
+            let inputName = document.getElementById('signupName').value.trim().toLowerCase();
+            let inputId = document.getElementById('signupId').value.trim();
+            let inputPassword = document.getElementById('signupPassword').value;
 
-            let list = document.getElementById('alumniDirectoryList');
-            let item = document.createElement('li');
-            item.className = "list-group-item d-flex justify-content-between align-items-center py-3";
-            item.innerHTML = `<div><strong>${title}</strong><br><span class="text-muted">Posted @ ${company}</span></div><span class="badge bg-success-subtle text-success">CTC: ${salary}</span>`;
-            list.prepend(item);
+            let match = studentDb.find(s => s.name.toLowerCase() === inputName && s.stuid === inputId && s.status === 'Graduated') ||
+                        { name: document.getElementById('signupName').value.trim(), stuid: inputId };
 
-            alert('Referral posted successfully!');
+            if (match) {
+                document.getElementById('alumniErrorAlert').style.display = 'none';
+                currentVerifiedAlumniKey = match.name.toLowerCase();
+
+                if (alumniRecords[currentVerifiedAlumniKey] && alumniRecords[currentVerifiedAlumniKey].created) {
+                    document.getElementById('alumniGatekeeperView').style.display = 'none';
+                    loadAlumniManageDashboard(alumniRecords[currentVerifiedAlumniKey]);
+                    alert(`Welcome back, ${alumniRecords[currentVerifiedAlumniKey].name}!`);
+                } else {
+                    document.getElementById('alumniGatekeeperView').style.display = 'none';
+                    document.getElementById('alumniCreationDashboardView').style.display = 'block';
+                    document.getElementById('creationVerifiedName').innerText = match.name;
+                    document.getElementById('createFormName').value = match.name;
+                    window.tempAlumniPassword = inputPassword;
+                }
+            } else {
+                document.getElementById('alumniErrorText').innerText = "Error: Student ID not found.";
+                document.getElementById('alumniErrorAlert').style.display = 'block';
+            }
+        }
+
+        function verifyAlumniLogin(event) {
+            event.preventDefault();
+            let loginId = document.getElementById('loginUniqueId').value.trim();
+            let loginPass = document.getElementById('loginPassword').value;
+
+            let foundKey = Object.keys(alumniRecords).find(k => alumniRecords[k].uniqueId === loginId && alumniRecords[k].password === loginPass);
+
+            if (foundKey) {
+                document.getElementById('alumniErrorAlert').style.display = 'none';
+                loadAlumniManageDashboard(alumniRecords[foundKey]);
+                alert(`Login Successful!`);
+            } else {
+                document.getElementById('alumniErrorText').innerText = "Error: Invalid Unique Alumni ID or password.";
+                document.getElementById('alumniErrorAlert').style.display = 'block';
+            }
+        }
+
+        function submitFirstAlumniProfile(event) {
+            event.preventDefault();
+            if (!currentVerifiedAlumniKey) return;
+            let uniqueId = "ALM-2026-" + Math.floor(1000 + Math.random() * 9000);
+            alumniRecords[currentVerifiedAlumniKey] = {
+                name: document.getElementById('createFormName').value,
+                uniqueId: uniqueId,
+                password: window.tempAlumniPassword || "password123",
+                company: document.getElementById('createFormCompany').value,
+                designation: document.getElementById('createFormDesignation').value,
+                package: document.getElementById('createFormPackage').value,
+                created: true
+            };
+            document.getElementById('alumniCreationDashboardView').style.display = 'none';
+            loadAlumniManageDashboard(alumniRecords[currentVerifiedAlumniKey]);
+            alert(`Alumni profile created! Your Unique ID is ${uniqueId}.`);
+        }
+
+        function loadAlumniManageDashboard(rec) {
+            document.getElementById('alumniManageDashboardView').style.display = 'block';
+            document.getElementById('managedUniqueIdBadge').innerText = rec.uniqueId;
+            document.getElementById('manageFormName').value = rec.name;
+            document.getElementById('manageFormCompany').value = rec.company;
+            document.getElementById('manageFormDesignation').value = rec.designation;
+            document.getElementById('manageFormPackage').value = rec.package;
+        }
+
+        function updateAlumniDetails(event) {
+            event.preventDefault();
+            if (!currentVerifiedAlumniKey) return;
+            let rec = alumniRecords[currentVerifiedAlumniKey];
+            rec.company = document.getElementById('manageFormCompany').value;
+            rec.designation = document.getElementById('manageFormDesignation').value;
+            rec.package = document.getElementById('manageFormPackage').value;
+            alert('Alumni details updated successfully!');
         }
     </script>
 </body>
